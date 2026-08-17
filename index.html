@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROPHECIES // TERMINAL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal-container">
+    <div class="doc-header">
+      <div class="doc-top-bar">
+        <span>CORE // SYSTEM_ONLINE</span>
+        <span>FREQUENCY: 432 Hz HARMONIC</span>
+        <span>STATUS: SECURE</span>
+      </div>
+      <h1 class="doc-title">PROPHECIES // SYSTEM_ONLINE</h1>
+      <p class="doc-subtitle">ENCYPTED TELEMETRY NETWORK</p>
+    </div>
+
+    <div class="telemetry-meta-grid">
+      <div class="telemetry-item">
+        <span>SECTORS CATALOGUED:</span>
+        <span id="sectors-cataloged-count">0 CLUSTERS</span>
+      </div>
+      <div class="telemetry-item">
+        <span>INTERFACE STATE:</span>
+        <span style="color: var(--crt-green);">AWAITING UPLINK</span>
+      </div>
+    </div>
+
+    <p>Frequencies established. No physical matter detected.</p>
+    <p>Initiate sequence.</p>
+    
+    <nav style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+      <a href="lore.html">> ACCESS_ENCRYPTED_TELEMETRY NETWORK</a>
+      <a href="documents.html" id="docs-archive-btn" class="btn-cyan" style="display: none;">> ACCESS_CLASSIFIED_DOCUMENTS_ARCHIVE</a>
+    </nav>
+  </div>
+
+  <script>
+    function updateState() {
+      try {
+        const savedTracks = localStorage.getItem('prophecies_unlocked_tracks') || localStorage.getItem('unlockedTracks');
+        let count = 0;
+        if (savedTracks) {
+          const parsed = JSON.parse(savedTracks);
+          if (Array.isArray(parsed)) {
+            count = parsed.length;
+          }
+        }
+        const sectorsCountEl = document.getElementById('sectors-cataloged-count');
+        if (sectorsCountEl) {
+          sectorsCountEl.textContent = count + ' CLUSTERS';
+        }
+
+        const isDocsUnlocked = localStorage.getItem('documentsUnlocked') === 'true' ||
+                               localStorage.getItem('prophecies_documents_unlocked') === 'true' ||
+                               count > 0;
+        const docsBtn = document.getElementById('docs-archive-btn');
+        if (docsBtn) {
+          docsBtn.style.display = isDocsUnlocked ? 'inline-block' : 'none';
+        }
+      } catch (err) {
+        console.error('Error updating state:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateState);
+    updateState();
+  </script>
+</body>
+</html>

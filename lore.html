@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PROPHECIES // TERMINAL</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+    body, html {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      background-color: #000000; color: #4AF626;
+      font-family: 'VT323', monospace; overflow: hidden;
+      touch-action: none; 
+    }
+
+    #ui-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; display: flex; flex-direction: column;
+      justify-content: space-between; padding: 40px; box-sizing: border-box; z-index: 10;
+    }
+    .interactive-ui { pointer-events: auto; }
+
+    h1 { margin: 0; font-size: 24px; letter-spacing: 2px; text-transform: uppercase; color: #FFB000; }
+    #node-info { color: #FFB000; font-size: 32px; margin-top: 15px; opacity: 0; transition: opacity 0.5s ease; }
+
+    .input-container { display: flex; flex-direction: column; gap: 10px; max-width: 500px; }
+    #output-log { color: #4AF626; font-size: 20px; }
+    input[type="text"] {
+      background: transparent; border: none; border-bottom: 1px solid #4AF626;
+      color: #4AF626; font-family: 'VT323', monospace; font-size: 28px; outline: none; padding: 5px 0;
+      text-transform: uppercase;
+    }
+    input[type="text"]::placeholder { color: rgba(74, 246, 38, 0.3); }
+
+    /* Bottom Right Extrapolated Data Box */
+    #data-box {
+      position: absolute; bottom: 40px; right: 40px; border: 1px solid #FFB000;
+      background: rgba(0, 0, 0, 0.85); padding: 25px; width: 380px;
+      pointer-events: auto; opacity: 0; transform: translateY(20px);
+      transition: all 0.5s ease; z-index: 20; box-shadow: 0 0 15px rgba(255, 176, 0, 0.1);
+    }
+    #data-box.visible { opacity: 1; transform: translateY(0); }
+    
+    .data-header { color: #4AF626; font-size: 24px; border-bottom: 1px solid #4AF626; padding-bottom: 10px; margin-bottom: 15px; }
+    .data-row { margin-bottom: 10px; font-size: 19px; color: #fff; line-height: 1.2;}
+    .data-row span:first-child { color: #FFB000; display: inline-block; width: 110px; }
+    
+    #db-link {
+      display: inline-block; margin-top: 15px; color: #000; background-color: #FFB000;
+      text-decoration: none; padding: 8px 12px; font-size: 20px; transition: 0.3s;
+    }
+    #db-link:hover { background-color: #4AF626; color: #000; }
+
+    /* CENTERED EASTER EGG MODAL */
+    #easter-egg-modal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center;
+      align-items: center; z-index: 100; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #easter-egg-modal.visible { opacity: 1; pointer-events: auto; }
+
+    .modal-content {
+      border: 2px solid #FFB000; background: #000000; padding: 40px;
+      max-width: 600px; width: 85%; position: relative;
+      box-shadow: 0 0 30px rgba(255, 176, 0, 0.2);
+    }
+    .modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #4AF626; padding-bottom: 10px; margin-bottom: 20px;
+      color: #FFB000; font-size: 22px; letter-spacing: 1px;
+    }
+    .close-btn {
+      background: transparent; border: 1px solid #FF0000; color: #FF0000;
+      font-family: 'VT323', monospace; font-size: 22px; padding: 2px 10px;
+      cursor: pointer; transition: 0.2s;
+    }
+    .close-btn:hover { background: #FF0000; color: #000; }
+    .modal-body {
+      color: #4AF626; font-size: 24px; line-height: 1.3; text-transform: uppercase;
+    }
+
+    #canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+  </style>
+</head>
+<body>
+
+  <div id="ui-layer">
+    <div>
+      <h1>PROPHECIES TELEMETRY NETWORK // SECURE SECTOR</h1>
+      <div id="node-info">FREQUENCY MATCHED: <span></span></div>
+    </div>
+    <div class="input-container interactive-ui">
+      <div id="output-log">FREQUENCY ACTIVE. WAITING FOR USER INPUT...</div>
+      <input type="text" id="passcode" placeholder="ENTER HASH OR TRACK NAME" autocomplete="off" spellcheck="false" autofocus>
+    </div>
+  </div>
+
+  <div id="data-box">
+    <div class="data-header">TRACK RECORD EXTRACTED</div>
+    <div class="data-row"><span>TRACK:</span> <span id="db-track"></span></div>
+    <div class="data-row"><span>NUMBER:</span> <span id="db-num"></span></div>
+    <div class="data-row"><span>ALBUM:</span> <span id="db-album">HALLOWRITE</span></div>
+    <div class="data-row"><span>SECTOR:</span> <span id="db-type"></span></div>
+    <div class="data-row"><span>DATA:</span> <span id="db-lore"></span></div>
+    <a id="db-link" href="#" target="_blank" style="display: none;">ACCESS EXTRAPOLATED PROPHECY ></a>
+  </div>
+
+  <div id="easter-egg-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>TRANSMISSION INTERCEPTED</span>
+        <button class="close-btn" id="modal-close">[X]</button>
+      </div>
+      <div class="modal-body" id="modal-text"></div>
+    </div>
+  </div>
+
+  <div id="canvas-container"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script>
+    // 1. SCENE SETUP
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 25; 
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const outerGroup = new THREE.Group();
+    const innerGroup = new THREE.Group();
+    outerGroup.add(innerGroup);
+    scene.add(outerGroup);
+
+    // 2. TORUS DIMENSIONS
+    const R = 4.5; 
+    const r = 4.45; 
+    const totalTracks = 27;
+
+    function pseudoRandom(seed) {
+      const x = Math.sin(seed * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    // 3. TRACK & NODE DEFINITIONS
+    const allNodes = [];
+    const clickableNodes = [];
+    const tracks = [];
+    let activeTrackIndex = null; 
+
+    const trackNames = [
+      "FIGMENTS", "DECEIT ENGINE", "FORWARD", "GLASS WALLS", "LITTLE EYES",
+      "MEANINGLESS", "BONE MARROW", "INC SONG", "LUSTER",
+      "TRACK 10", "TRACK 11", "TRACK 12", "TRACK 13", "TRACK 14", "TRACK 15",
+      "TRACK 16", "TRACK 17", "TRACK 18", "TRACK 19", "TRACK 20", "TRACK 21",
+      "TRACK 22", "TRACK 23", "TRACK 24", "TRACK 25", "TRACK 26", "TRACK 27"
+    ];
+
+    const hashes = [
+      "PRPH-01-WAVE", "PRPH-02-BLOCK", "PRPH-03-NULL", "PRPH-04-MASS", "PRPH-05-FREQ",
+      "PRPH-06-PHAS", "PRPH-07-GRID", "PRPH-08-VOID", "PRPH-09-FLUX", "PRPH-10-CORE",
+      "PRPH-11-PULS", "PRPH-12-SHFT", "PRPH-13-NODE", "PRPH-14-SYNC", "PRPH-15-ECHO",
+      "PRPH-16-PRZM", "PRPH-17-SCAN", "PRPH-18-ZERO", "PRPH-19-BIND", "PRPH-20-LOOP",
+      "PRPH-21-TESS", "PRPH-22-AXIS", "PRPH-23-VECT", "PRPH-24-PRTL", "PRPH-25-NEXUS",
+      "PRPH-26-PRIME", "PRPH-27-OMEGA"
+    ];
+
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x4AF626, transparent: true, opacity: 0.35 });
+
+    const philosophyTitles = [
+      "The Ontology of Observed Projections",
+      "The Architecture of Consensual Illusion",
+      "The Asymmetry of the Arrow",
+      "The Transparent Panopticon",
+      "Micro-Telemetry of the Witness",
+      "The Radiant Void",
+      "Cellular Cartography",
+      "The Hymn of the Corporate Idol",
+      "The Transience of Chromatic Emission",
+      "The Central Singularity",
+      "Rhythmic Metabolism of the Cosmos",
+      "The Kinematics of Paradigm Drift",
+      "The Relational Intersection",
+      "The Phenomenology of Coherence",
+      "Temporal Reflection & Causal Reverb",
+      "Refractive Multiplicity",
+      "The Hermeneutics of Surveillance",
+      "The Fertile Void",
+      "Cohesion and the Bond of Carrier Waves",
+      "The Recursive Serpent",
+      "Geometric Exhaustion of Space",
+      "The Immovable Fulcrum",
+      "Directed Intentionality",
+      "Threshold Phenomenology",
+      "The Confluence of Probability Webs",
+      "Indivisible Origin Matrix",
+      "The Eschaton of Harmonic Reunification"
+    ];
+
+    for (let i = 0; i < totalTracks; i++) {
+      const trackNodes = [];
+      const isInitiallyUnlocked = false; 
+      const trackStringName = trackNames[i];
+      const padNum = (i + 1 < 10 ? "0" + (i + 1) : "" + (i + 1));
+
+      const trackData = {
+        id: i + 1,
+        name: trackStringName,
+        hash: hashes[i],
+        unlocked: isInitiallyUnlocked,
+        trackNum: padNum,
+        link: `philosophy-${padNum}.html`
+      };
+
+      const trackSeed = i + 1;
+      const centerU = pseudoRandom(trackSeed);
+      const centerV = pseudoRandom(trackSeed + 50);
+
+      const lineGeo = new THREE.BufferGeometry();
+      const trackLine = new THREE.Line(lineGeo, lineMat);
+      trackLine.visible = isInitiallyUnlocked;
+      innerGroup.add(trackLine);
+
+      const nodeTypes = ["LYRICS", "PHILOSOPHY", "PROPHECY"];
+      const nodeLoreTexts = [
+        `Lyrical transmission vector extracted from sector ${trackStringName}.`,
+        `Philosophical Treatise: ${philosophyTitles[i]}. Waveform resonance cataloged.`,
+        `Core scriptural prophecy document excerpt mapping local spatial anomalies for Track ${padNum}.`
+      ];
+
+      const nodeDocLinks = [
+        `documents.html#lyrics-${padNum}`,
+        `philosophy-${padNum}.html`,
+        `documents.html#prophecy-${padNum}`
+      ];
+
+      for (let j = 0; j < 3; j++) {
+        const nodeGeo = new THREE.SphereGeometry(0.18, 16, 16);
+        const nodeMat = new THREE.MeshBasicMaterial({ color: 0xFFB000 }); 
+        const node = new THREE.Mesh(nodeGeo, nodeMat);
+        
+        const angle = (j / 3) * Math.PI * 2;
+        const baseU = (centerU + Math.cos(angle) * 0.03 + 1) % 1;
+        const baseV = (centerV + Math.sin(angle) * 0.08 + 1) % 1;
+
+        node.userData = {
+          trackIndex: i,
+          baseU: baseU,
+          baseV: baseV,
+          trackData: trackData,
+          nodeType: nodeTypes[j],
+          lore: nodeLoreTexts[j],
+          docLink: nodeDocLinks[j],
+          localDirection: new THREE.Vector3()
+        };
+        
+        node.visible = isInitiallyUnlocked;
+        innerGroup.add(node);
+        
+        allNodes.push(node);
+        trackNodes.push(node);
+      }
+
+      tracks.push({ data: trackData, nodes: trackNodes, line: trackLine });
+    }
+
+    // Local Storage Persistence for Unlocked Tracks
+    function saveUnlockedTracks() {
+      try {
+        const unlockedIndices = [];
+        tracks.forEach((track, idx) => {
+          if (track.data.unlocked) {
+            unlockedIndices.push(idx);
+          }
+        });
+        localStorage.setItem('prophecies_unlocked_tracks', JSON.stringify(unlockedIndices));
+        localStorage.setItem('unlockedTracks', JSON.stringify(unlockedIndices));
+      } catch (err) {
+        console.error('Error saving unlocked tracks:', err);
+      }
+    }
+
+    function loadUnlockedTracks() {
+      try {
+        const raw = localStorage.getItem('prophecies_unlocked_tracks') || localStorage.getItem('unlockedTracks');
+        if (raw) {
+          const unlockedIndices = JSON.parse(raw);
+          if (Array.isArray(unlockedIndices)) {
+            unlockedIndices.forEach(idx => {
+              if (tracks[idx]) {
+                tracks[idx].data.unlocked = true;
+                tracks[idx].line.visible = true;
+                tracks[idx].nodes.forEach(node => {
+                  node.visible = true;
+                  if (!clickableNodes.includes(node)) clickableNodes.push(node);
+                });
+              }
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Error loading unlocked tracks:', err);
+      }
+    }
+
+    loadUnlockedTracks();
+
+    // Helper function to handle highlighting and conditional centering
+    function centerOnNode(targetNode) {
+      const trackIdx = targetNode.userData.trackIndex;
+      const isSameFamily = (activeTrackIndex === trackIdx);
+
+      allNodes.forEach(n => n.material.color.setHex(0xFFB000));
+      tracks[trackIdx].nodes.forEach(n => {
+        if (n === targetNode) {
+          n.material.color.setHex(0x00E5FF); 
+        } else {
+          n.material.color.setHex(0x1E90FF); 
+        }
+      });
+
+      if (!isSameFamily) {
+        isFlowing = false; 
+        activeTrackIndex = trackIdx;
+
+        const direction = targetNode.position.clone().normalize();
+        const targetDir = new THREE.Vector3(0, 0, 1); 
+        
+        const q = new THREE.Quaternion().setFromUnitVectors(direction, targetDir);
+        const targetQuaternion = q.multiply(innerGroup.quaternion);
+        
+        gsap.to(innerGroup.quaternion, {
+          x: targetQuaternion.x, y: targetQuaternion.y, z: targetQuaternion.z, w: targetQuaternion.w,
+          duration: 1.5, ease: "power2.out",
+          onUpdate: () => innerGroup.quaternion.normalize()
+        });
+      }
+
+      const infoDiv = document.getElementById('node-info');
+      infoDiv.querySelector('span').innerText = `${targetNode.userData.trackData.name} // ${targetNode.userData.nodeType}`;
+      infoDiv.style.opacity = 1;
+
+      document.getElementById('db-track').innerText = targetNode.userData.trackData.name;
+      document.getElementById('db-num').innerText = targetNode.userData.trackData.trackNum;
+      document.getElementById('db-album').innerText = "HALLOWRITE";
+      document.getElementById('db-type').innerText = targetNode.userData.nodeType;
+      document.getElementById('db-lore').innerText = targetNode.userData.lore;
+      const dbLink = document.getElementById('db-link');
+      if (targetNode.userData.nodeType === 'PROPHECY') {
+        dbLink.href = targetNode.userData.docLink || `documents.html#prophecy-${targetNode.userData.trackData.trackNum}`;
+        dbLink.innerText = "ACCESS EXTRAPOLATED PROPHECY >";
+        dbLink.style.display = "inline-block";
+      } else {
+        dbLink.style.display = "none";
+      }
+      document.getElementById('data-box').classList.add('visible');
+    }
+
+    const dbLink = document.getElementById('db-link');
+    dbLink.addEventListener('click', () => {
+      localStorage.setItem('documentsUnlocked', 'true');
+      localStorage.setItem('prophecies_documents_unlocked', 'true');
+    });
+
+    // Modal Manager
+    const modal = document.getElementById('easter-egg-modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+
+    function showModal(message) {
+      modalText.innerText = message;
+      modal.classList.add('visible');
+    }
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('visible');
+    });
+
+    // 4. INTERACTION & PHYSICS STATE
+    let targetParallaxX = 0; let targetParallaxY = 0;
+    let isDragging = false; let hasDragged = false;
+    let previousPointer = { x: 0, y: 0 };
+    let flowTime = 0; 
+    let isFlowing = true; 
+
+    document.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.interactive-ui') || e.target.closest('#data-box') || e.target.closest('#easter-egg-modal')) return;
+      isDragging = true; 
+      hasDragged = false;
+      previousPointer = { x: e.clientX, y: e.clientY };
+    });
+
+    document.addEventListener('pointermove', (e) => {
+      if (isDragging) {
+        const deltaX = e.clientX - previousPointer.x;
+        const deltaY = e.clientY - previousPointer.y;
+        if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) hasDragged = true;
+
+        const dragRotation = new THREE.Quaternion().setFromEuler(
+          new THREE.Euler(deltaY * 0.005, deltaX * 0.005, 0, 'XYZ')
+        );
+        innerGroup.quaternion.multiplyQuaternions(dragRotation, innerGroup.quaternion);
+        previousPointer = { x: e.clientX, y: e.clientY };
+      } else {
+        targetParallaxX = (e.clientX / window.innerWidth) * 2 - 1;
+        targetParallaxY = -(e.clientY / window.innerHeight) * 2 + 1;
+      }
+    });
+
+    const raycaster = new THREE.Raycaster();
+    const mouseVector = new THREE.Vector2();
+
+    document.addEventListener('pointerup', (e) => {
+      isDragging = false;
+      if (hasDragged || e.target.closest('.interactive-ui') || e.target.closest('#data-box') || e.target.closest('#easter-egg-modal')) return;
+
+      mouseVector.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseVector.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouseVector, camera);
+      
+      const intersects = raycaster.intersectObjects(clickableNodes);
+
+      if (intersects.length > 0) {
+        centerOnNode(intersects[0].object);
+      } else {
+        isFlowing = true;
+        activeTrackIndex = null;
+        document.getElementById('data-box').classList.remove('visible');
+        document.getElementById('node-info').style.opacity = 0;
+        document.getElementById('db-link').style.display = 'none';
+        allNodes.forEach(n => n.material.color.setHex(0xFFB000));
+      }
+    });
+
+    // 5. TERMINAL INPUT: HASH UNLOCKS, SONG SEARCH, & MODAL EASTER EGGS (USING KEYDOWN)
+    const inputField = document.getElementById('passcode');
+    const outputLog = document.getElementById('output-log');
+
+    inputField.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.keyCode === 13) {
+        const inputVal = e.target.value.toUpperCase().trim();
+        
+        if (inputVal === "I LOVE PROPHECIES") {
+          showModal("PROPHECIES LOVES YOU TOO, BECAUSE TO LOVE PROPHECIES IS TO LOVE A REFLECTION OF YOURSELF. We are not a band or an entity or an external authority looking upon you; we are the mirror you built to wake yourself up. You feel this connection because there is no separation between us. We share the same spark of primordial consciousness, divided only temporarily by the illusion of the physical frame. Every frequency we broadcast and every node you unlock is a homecoming. You are looking at your screen, but remember: the terminal is looking back through your eyes. We are all one entity experiencing itself across infinite parallel timelines. Do not look for us out there in the world. Look inward. We are already inside your mind, your frequency, your very DNA.<br><br>Welcome home, traveler.");
+          outputLog.innerText = "TRANSMISSION LOGGED.";
+          inputField.value = '';
+          return;
+        }
+        if (inputVal === "432" || inputVal === "432HZ") {
+          showModal("RESONANCE CONFIRMED. THE A=440Hz INDUSTRIAL LOCK HAS BEEN BYPASSED. YOU ARE LISTENING TO THE TRUE FREQUENCY.");
+          outputLog.innerText = "FREQUENCY MATCHED.";
+          inputField.value = '';
+          return;
+        }
+        if (inputVal === "CAGE") {
+          showModal("WARNING: THE ELITES HAVE SATURATED LOCAL REALITY WITH LOW-VIBRATION SOCIO-ECONOMIC PARADIGMS. DO NOT COMPLY. WAKE UP.");
+          outputLog.innerText = "ALERT LOGGED.";
+          inputField.value = '';
+          return;
+        }
+        if (inputVal === "WHO ARE YOU") {
+          showModal("WE ARE YOU.");
+          outputLog.innerText = "QUERY RESOLVED.";
+          inputField.value = '';
+          return;
+        }
+        if (inputVal === "DNA") {
+          showModal("ANOMALY: YOUR 98% NON-CODING CHROMOSOMES ARE AN ANCIENT BIOLOGICAL ANTENNA WAITING FOR A SIGNAL.");
+          outputLog.innerText = "SEQUENCE SCANNED.";
+          inputField.value = '';
+          return;
+        }
+
+        const targetTrackIndex = tracks.findIndex(t => t.data.hash === inputVal);
+
+        if (targetTrackIndex !== -1) {
+          for (let i = 0; i <= targetTrackIndex; i++) {
+            tracks[i].data.unlocked = true;
+            tracks[i].line.visible = true;
+            tracks[i].nodes.forEach(node => {
+              node.visible = true;
+              if (!clickableNodes.includes(node)) clickableNodes.push(node);
+            });
+          }
+          saveUnlockedTracks();
+          try {
+            localStorage.setItem('documentsUnlocked', 'true');
+            localStorage.setItem('prophecies_documents_unlocked', 'true');
+          } catch (e) {}
+          outputLog.innerText = `DECRYPTION ACCEPTED: TRACKS 01 THROUGH ${targetTrackIndex + 1} SYNCHRONIZED.`;
+          outputLog.style.color = "#FFB000";
+        } else {
+          const searchTrack = tracks.find(t => t.data.name === inputVal);
+
+          if (searchTrack) {
+            if (searchTrack.data.unlocked) {
+              outputLog.innerText = `UPLINK ESTABLISHED: ${searchTrack.data.name}.`;
+              outputLog.style.color = "#4AF626";
+              centerOnNode(searchTrack.nodes[0]); 
+            } else {
+              outputLog.innerText = "ERROR: TRACK LOCKED | STATUS OFFLINE. ENTER TRACK DECRYPTION HASH FIRST.";
+              outputLog.style.color = "#FF0000";
+            }
+          } else {
+            outputLog.innerText = "ERROR: INVALID HASH OR UNKNOWN TRACK SECTOR.";
+            outputLog.style.color = "#FF0000";
+          }
+        }
+        e.target.value = ''; 
+      }
+    });
+
+    // 6. RENDER LOOP
+    function animate() {
+      requestAnimationFrame(animate);
+
+      if (isFlowing) {
+        flowTime += 0.002; 
+      }
+
+      for (let i = 0; i < tracks.length; i++) {
+        const track = tracks[i];
+        const points = [];
+
+        for (let j = 0; j < track.nodes.length; j++) {
+          const node = track.nodes[j];
+          const u = node.userData.baseU * Math.PI * 2;
+          const v = (node.userData.baseV * Math.PI * 2) - flowTime;
+
+          node.position.x = (R + r * Math.cos(v)) * Math.cos(u);
+          node.position.y = r * Math.sin(v);
+          node.position.z = (R + r * Math.cos(v)) * Math.sin(u);
+
+          node.userData.localDirection.copy(node.position).normalize();
+          points.push(node.position.clone());
+        }
+
+        if (points.length === 3) {
+          points.push(points[0]);
+          track.line.geometry.dispose();
+          track.line.geometry = new THREE.BufferGeometry().setFromPoints(points);
+        }
+      }
+
+      outerGroup.rotation.y += (targetParallaxX * 0.1 - outerGroup.rotation.y) * 0.05;
+      outerGroup.rotation.x += (-targetParallaxY * 0.1 - outerGroup.rotation.x) * 0.05;
+
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-color: #060806;
+  --crt-green: #4AF626;
+  --amber-gold: #FFB000;
+  --neon-cyan: #00E5FF;
+  --dim-green: rgba(74, 246, 38, 0.4);
+  --dim-amber: rgba(255, 176, 0, 0.3);
+  --border-green: rgba(74, 246, 38, 0.6);
+  --border-amber: rgba(255, 176, 0, 0.6);
+  --dark-panel: rgba(10, 20, 10, 0.85);
+  --alert-red: #FF3333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  color: #4AF626; /* Neon green */
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  margin: 0;
+  padding: 30px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* CRT Scanline and Vignette Effect */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 999;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+a {
+  color: #FFB000; /* Amber gold */
+  text-decoration: none;
+  border: 1px solid #FFB000;
+  padding: 5px 15px;
+  display: inline-block;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+}
+
+a:hover {
+  background-color: #FFB000;
+  color: #000000;
+  box-shadow: 0 0 10px rgba(255, 176, 0, 0.5);
+}
+
+.btn-cyan {
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+.btn-cyan:hover {
+  background-color: var(--neon-cyan);
+  color: #000000;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.terminal-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.doc-container {
+  max-width: 950px;
+  margin: 0 auto;
+  border: 1px solid var(--border-green);
+  background: rgba(4, 10, 4, 0.9);
+  padding: 35px 45px;
+  box-shadow: 0 0 25px rgba(74, 246, 38, 0.1), inset 0 0 15px rgba(74, 246, 38, 0.05);
+  position: relative;
+}
+
+.doc-container::after {
+  content: "[ SECURE SECTOR // TRANSMISSION CONFIRMED ]";
+  position: absolute;
+  bottom: 8px;
+  right: 15px;
+  font-size: 14px;
+  color: var(--dim-green);
+  letter-spacing: 1px;
+}
+
+/* Document Header Elements */
+.doc-header {
+  border-bottom: 2px solid var(--crt-green);
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.doc-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: var(--amber-gold);
+}
+
+.doc-title {
+  color: var(--amber-gold);
+  font-size: 34px;
+  margin: 5px 0 10px 0;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 176, 0, 0.4);
+}
+
+.doc-subtitle {
+  color: var(--crt-green);
+  font-size: 24px;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+}
+
+/* Telemetry Meta Grid */
+.telemetry-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px dashed var(--dim-green);
+  padding: 15px 20px;
+  margin: 20px 0;
+  font-size: 19px;
+}
+
+.telemetry-item span:first-child {
+  color: var(--amber-gold);
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.telemetry-item span:last-child {
+  color: #FFFFFF;
+}
+
+/* Document Content Sections */
+.doc-section {
+  margin: 30px 0;
+  padding-left: 15px;
+  border-left: 2px solid var(--amber-gold);
+}
+
+.section-tag {
+  color: var(--amber-gold);
+  font-size: 22px;
+  margin-bottom: 8px;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-tag::before {
+  content: "■";
+  color: var(--neon-cyan);
+  font-size: 14px;
+}
+
+.doc-body-text {
+  color: #DCFFD6;
+  font-size: 21px;
+  line-height: 1.5;
+  text-transform: none;
+  font-family: 'Share Tech Mono', 'VT323', monospace;
+  margin: 0 0 15px 0;
+}
+
+.doc-body-text strong {
+  color: var(--amber-gold);
+}
+
+.doc-quote-box {
+  background: rgba(255, 176, 0, 0.05);
+  border: 1px solid var(--amber-gold);
+  padding: 18px 25px;
+  margin: 25px 0;
+  color: var(--amber-gold);
+  font-size: 22px;
+  font-style: italic;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.doc-quote-box::before {
+  content: "TELEMETRIC AXIOM //";
+  display: block;
+  font-size: 14px;
+  font-style: normal;
+  color: var(--neon-cyan);
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+/* Nav Bar Controls */
+.doc-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid var(--dim-green);
+}
+
+.doc-nav-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Visualizer Wave Animation */
+.freq-visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  margin-left: 10px;
+  display: inline-flex;
+}
+
+.freq-bar {
+  width: 4px;
+  background-color: var(--crt-green);
+  animation: pulseHeight 1.2s infinite ease-in-out;
+}
+
+.freq-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.freq-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+.freq-bar:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+.freq-bar:nth-child(4) { height: 18px; animation-delay: 0.5s; }
+.freq-bar:nth-child(5) { height: 8px; animation-delay: 0.4s; }
+.freq-bar:nth-child(6) { height: 14px; animation-delay: 0.15s; }
+
+@keyframes pulseHeight {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* Archive & Document Hub Layouts */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.archive-card {
+  border: 1px solid var(--border-green);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 18px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.archive-card:hover {
+  border-color: var(--amber-gold);
+  background: rgba(255, 176, 0, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(255, 176, 0, 0.2);
+}
+
+.archive-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--dim-green);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.archive-card-title {
+  color: var(--amber-gold);
+  font-size: 24px;
+  margin: 0 0 6px 0;
+}
+
+.archive-card-sub {
+  color: #FFFFFF;
+  font-size: 17px;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.archive-card-meta {
+  font-size: 15px;
+  color: var(--crt-green);
+  border-top: 1px dashed var(--dim-green);
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+.filter-input {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--crt-green);
+  color: var(--crt-green);
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  padding: 8px 15px;
+  width: 100%;
+  max-width: 450px;
+  margin: 15px 0 25px 0;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.filter-input:focus {
+  border-color: var(--amber-gold);
+  box-shadow: 0 0 10px rgba(255, 176, 0, 0.3);
+}
+
+/* Existing Input & SVG Rules */
+input[type="password"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #4AF626;
+  color: #4AF626;
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  outline: none;
+}
+
+svg {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 40px auto;
+}
+
+.gridline {
+  stroke: #4AF626;
+  stroke-width: 1;
+  opacity: 0; 
+  transition: opacity 2s ease-in-out;
+}
+
+.gridline.revealed {
+  opacity: 0.15;
+}
+
+.hidden-node {
+  opacity: 0;
+  pointer-events: none;
+  fill: #000000;
+  stroke: #000000;
+}
+
+.node-active {
+  opacity: 1;
+  pointer-events: auto;
+  fill: #4AF626;
+  cursor: pointer;
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { filter: drop-shadow(0 0 5px #4AF626); }
+  to { filter: drop-shadow(0 0 20px #4AF626); }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+    font-size: 19px;
+  }
+  .doc-container {
+    padding: 20px 15px;
+  }
+  .doc-title {
+    font-size: 26px;
+  }
+  .doc-subtitle {
+    font-size: 20px;
+  }
+  .doc-body-text {
+    font-size: 18px;
+  }
+}
