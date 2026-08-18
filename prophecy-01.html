@@ -259,43 +259,54 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const paragraphs = Array.from(document.querySelectorAll('.doc-body-text'));
-      if (!paragraphs.length) return;
+      const sections = Array.from(document.querySelectorAll('.doc-section'));
+      if (!sections.length) return;
 
       const cursor = document.createElement('span');
       cursor.className = 'typewriter-cursor';
       cursor.textContent = '█';
 
-      const entries = paragraphs.map(p => {
-        const origHTML = p.innerHTML;
-        const chars = [];
+      const sectionData = sections.map(sec => {
+        const paragraphs = Array.from(sec.querySelectorAll('.doc-body-text'));
+        const pEntries = paragraphs.map(p => {
+          const origHTML = p.innerHTML;
+          const chars = [];
 
-        function processNode(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            const text = node.textContent;
-            const frag = document.createDocumentFragment();
-            for (let i = 0; i < text.length; i++) {
-              const span = document.createElement('span');
-              span.className = 'tw-char';
-              span.style.display = 'none';
-              span.textContent = text[i];
-              frag.appendChild(span);
-              chars.push(span);
+          function processNode(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+              const text = node.textContent;
+              const frag = document.createDocumentFragment();
+              for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.className = 'tw-char';
+                span.style.display = 'none';
+                span.textContent = text[i];
+                frag.appendChild(span);
+                chars.push(span);
+              }
+              node.parentNode.replaceChild(frag, node);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              Array.from(node.childNodes).forEach(processNode);
             }
-            node.parentNode.replaceChild(frag, node);
-          } else if (node.nodeType === Node.ELEMENT_NODE) {
-            Array.from(node.childNodes).forEach(processNode);
           }
-        }
 
-        processNode(p);
+          processNode(p);
+          return {
+            element: p,
+            chars: chars,
+            origHTML: origHTML
+          };
+        });
+
         return {
-          element: p,
-          chars: chars,
-          origHTML: origHTML
+          sectionEl: sec,
+          paragraphs: pEntries
         };
-      });
+      }).filter(s => s.paragraphs.length > 0);
 
+      if (!sectionData.length) return;
+
+      let secIndex = 0;
       let pIndex = 0;
       let charIndex = 0;
       let isTyping = true;
@@ -303,16 +314,27 @@
       const typingSpeed = 15; // 15ms per character
 
       function typeNextChar() {
-        if (pIndex >= entries.length) {
+        if (secIndex >= sectionData.length) {
           if (cursor.parentNode) cursor.remove();
           isTyping = false;
           return;
         }
 
-        const current = entries[pIndex];
+        const currentSec = sectionData[secIndex];
 
-        if (charIndex < current.chars.length) {
-          const charSpan = current.chars[charIndex];
+        if (pIndex >= currentSec.paragraphs.length) {
+          // Current entry completed naturally, proceed to next entry
+          secIndex++;
+          pIndex = 0;
+          charIndex = 0;
+          timer = setTimeout(typeNextChar, 180);
+          return;
+        }
+
+        const currentP = currentSec.paragraphs[pIndex];
+
+        if (charIndex < currentP.chars.length) {
+          const charSpan = currentP.chars[charIndex];
           charSpan.style.display = 'inline';
           charSpan.after(cursor);
           charIndex++;
@@ -324,21 +346,41 @@
         }
       }
 
-      function skipTyping(e) {
+      function skipCurrentSection(e) {
         if (!isTyping) return;
         if (e && e.target && e.target.closest('a')) return;
+
         clearTimeout(timer);
-        isTyping = false;
-        if (cursor.parentNode) cursor.remove();
-        entries.forEach(item => {
-          item.element.innerHTML = item.origHTML;
-        });
+
+        if (secIndex < sectionData.length) {
+          const currentSec = sectionData[secIndex];
+          // Instantly complete current entry
+          currentSec.paragraphs.forEach(item => {
+            item.element.innerHTML = item.origHTML;
+          });
+
+          // Advance to the next entry
+          secIndex++;
+          pIndex = 0;
+          charIndex = 0;
+
+          if (secIndex < sectionData.length) {
+            const nextSec = sectionData[secIndex];
+            if (nextSec.paragraphs.length > 0) {
+              nextSec.paragraphs[0].element.prepend(cursor);
+            }
+            timer = setTimeout(typeNextChar, 80);
+          } else {
+            if (cursor.parentNode) cursor.remove();
+            isTyping = false;
+          }
+        }
       }
 
-      document.addEventListener('click', skipTyping);
+      document.addEventListener('click', skipCurrentSection);
 
-      if (entries.length > 0 && entries[0].chars.length > 0) {
-        entries[0].element.prepend(cursor);
+      if (sectionData[0].paragraphs.length > 0) {
+        sectionData[0].paragraphs[0].element.prepend(cursor);
       }
 
       typeNextChar();
