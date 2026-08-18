@@ -241,7 +241,7 @@
     <div class="data-row"><span>ALBUM:</span> <span id="db-album">HALLOWRITE</span></div>
     <div class="data-row"><span>SECTOR:</span> <span id="db-type"></span></div>
     <div class="data-row"><span id="db-data-label">DATA:</span> <span id="db-lore"></span></div>
-    <a id="db-link" href="#" target="_blank" style="display: none;">ACCESS EXTRAPOLATED PROPHECY ></a>
+    <a id="db-link" href="#" target="_blank" style="display: none;">ACCESS FIELD NOTES ></a>
   </div>
 
   <div id="easter-egg-modal">
@@ -497,7 +497,7 @@
       const dbLink = document.getElementById('db-link');
       if (targetNode.userData.nodeType === 'PROPHECY') {
         dbLink.href = targetNode.userData.docLink || `documents.html#prophecy-${targetNode.userData.trackData.trackNum}`;
-        dbLink.innerText = "ACCESS EXTRAPOLATED PROPHECY >";
+        dbLink.innerText = "ACCESS FIELD NOTES >";
         dbLink.style.display = "inline-block";
       } else {
         dbLink.style.display = "none";
