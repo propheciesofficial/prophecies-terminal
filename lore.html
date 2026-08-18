@@ -375,7 +375,7 @@
       const nodeDocLinks = [
         `documents.html#lyrics-${padNum}`,
         `prophecy-${padNum}.html`,
-        `documents.html#prophecy-${padNum}`
+        `prophecy-${padNum}.html`
       ];
 
       for (let j = 0; j < 3; j++) {
@@ -496,19 +496,35 @@
       document.getElementById('db-lore').innerText = targetNode.userData.lore;
       const dbLink = document.getElementById('db-link');
       if (targetNode.userData.nodeType === 'PROPHECY') {
-        dbLink.href = targetNode.userData.docLink || `documents.html#prophecy-${targetNode.userData.trackData.trackNum}`;
+        dbLink.href = targetNode.userData.docLink || `prophecy-${targetNode.userData.trackData.trackNum}.html`;
         dbLink.innerText = "ACCESS FIELD NOTES >";
         dbLink.style.display = "inline-block";
       } else {
         dbLink.style.display = "none";
       }
+      selectedNode = targetNode;
       document.getElementById('data-box').classList.add('visible');
     }
 
+    let selectedNode = null;
     const dbLink = document.getElementById('db-link');
     dbLink.addEventListener('click', () => {
       localStorage.setItem('documentsUnlocked', 'true');
       localStorage.setItem('prophecies_documents_unlocked', 'true');
+      if (selectedNode && selectedNode.userData && typeof selectedNode.userData.trackIndex === 'number') {
+        try {
+          const raw = localStorage.getItem('prophecies_unlocked_tracks') || localStorage.getItem('unlockedTracks');
+          let unlocked = raw ? JSON.parse(raw) : [];
+          if (!Array.isArray(unlocked)) unlocked = [];
+          if (!unlocked.includes(selectedNode.userData.trackIndex)) {
+            unlocked.push(selectedNode.userData.trackIndex);
+            localStorage.setItem('prophecies_unlocked_tracks', JSON.stringify(unlocked));
+            localStorage.setItem('unlockedTracks', JSON.stringify(unlocked));
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
     });
 
     // Modal Manager

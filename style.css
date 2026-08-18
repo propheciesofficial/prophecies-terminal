@@ -281,6 +281,28 @@ a:hover {
   box-shadow: 0 0 15px rgba(255, 176, 0, 0.2);
 }
 
+.archive-card.card-highlight {
+  border-color: var(--amber-gold) !important;
+  background: rgba(255, 176, 0, 0.12) !important;
+  box-shadow: 0 0 25px rgba(255, 176, 0, 0.7), inset 0 0 15px rgba(255, 176, 0, 0.3) !important;
+  animation: cardPulse 1.8s ease-in-out 3;
+}
+
+@keyframes cardPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 176, 0, 0.4);
+    border-color: var(--amber-gold);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 176, 0, 0.95), inset 0 0 20px rgba(255, 176, 0, 0.4);
+    border-color: #FFFFFF;
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 176, 0, 0.4);
+    border-color: var(--amber-gold);
+  }
+}
+
 .archive-card-header {
   display: flex;
   justify-content: space-between;

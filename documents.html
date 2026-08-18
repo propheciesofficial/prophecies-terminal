@@ -431,8 +431,52 @@
             filterInput.addEventListener('input', updateArchiveDisplay);
         }
 
-        document.addEventListener('DOMContentLoaded', updateArchiveDisplay);
+        function handleHashHighlight() {
+            const hash = window.location.hash;
+            if (!hash) return;
+
+            const match = hash.match(/(?:prophecy|track|node|lyrics)-?(\d+)/i);
+            if (!match) return;
+
+            const trackNum = parseInt(match[1], 10);
+            const trackIdx = trackNum - 1;
+
+            try {
+                let unlocked = getUnlockedIndices();
+                if (!unlocked.includes(trackIdx)) {
+                    unlocked.push(trackIdx);
+                    localStorage.setItem('prophecies_unlocked_tracks', JSON.stringify(unlocked));
+                    localStorage.setItem('unlockedTracks', JSON.stringify(unlocked));
+                }
+            } catch (e) {
+                console.error('Error unlocking track from hash:', e);
+            }
+
+            updateArchiveDisplay();
+
+            const targetCard = document.querySelector(`.archive-card[data-track-index="${trackIdx}"]`);
+            if (targetCard) {
+                targetCard.style.display = 'flex';
+                if (noDocsMsg) noDocsMsg.style.display = 'none';
+
+                setTimeout(() => {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetCard.classList.remove('card-highlight');
+                    void targetCard.offsetWidth;
+                    targetCard.classList.add('card-highlight');
+                }, 150);
+            }
+        }
+
+        window.addEventListener('hashchange', handleHashHighlight);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateArchiveDisplay();
+            handleHashHighlight();
+        });
+
         updateArchiveDisplay();
+        handleHashHighlight();
     </script>
 
 </body>
