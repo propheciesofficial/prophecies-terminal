@@ -193,11 +193,11 @@ a:hover {
 }
 
 /* Color Highlight Utility Classes */
-.text-purple, .purple { color: var(--neon-purple); }
+.text-purple, .purple, .neon-purple { color: var(--neon-purple); }
 .text-cyan, .cyan, .neon-cyan { color: var(--neon-cyan); }
-.text-amber, .amber { color: var(--amber-gold); }
-.text-green, .green { color: var(--crt-green); }
-.text-red, .red { color: var(--alert-red); }
+.text-amber, .amber, .amber-gold, .text-amber-gold { color: var(--amber-gold); }
+.text-green, .green, .crt-green { color: var(--crt-green); }
+.text-red, .red, .alert-red, .text-alert-red { color: var(--alert-red); }
 
 .doc-quote-box {
   background: rgba(255, 176, 0, 0.05);
