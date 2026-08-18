@@ -1,417 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARCHIVES</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="terminal-container doc-container">
-    
-    <div class="doc-header">
-        <div class="doc-top-bar">
-            <span>SECURITY LEVEL: PROGRESSIVE CLEARANCE.</span>
-            <span>SECTOR: ARCHIVES</span>
+    <div class="terminal-container doc-container">
+
+        <div class="doc-header">
+            <div class="doc-top-bar">
+                <span>SECURITY LEVEL: PROGRESSIVE CLEARANCE.</span>
+                <span>SECTOR: ARCHIVES</span>
+            </div>
+            <h1 class="doc-title">SYSTEM: TELEMETRY INDEX</h1>
+            <h2 class="doc-subtitle">Repository</h2>
         </div>
-        <h1 class="doc-title">SYSTEM: TELEMETRY INDEX</h1>
-        <h2 class="doc-subtitle">Repository</h2>
+
+        <div class="telemetry-meta-grid">
+            <div class="telemetry-item">
+                <span>TOTAL NODES:</span>
+                <span id="unlocked-count-display">0 DECRYPTED</span>
+            </div>
+            <div class="telemetry-item">
+                <span>SYSTEM STATUS:</span>
+                <span>SYNCHRONIZED (432Hz)</span>
+            </div>
+            <div class="telemetry-item">
+                <span>ENCRYPTION:</span>
+                <span>QUANTUM HASH ENCODED</span>
+            </div>
+            <div class="telemetry-item">
+                <span>CARRIER PROTOCOL:</span>
+                <span>HALLOWRITE-BROADCAST</span>
+            </div>
+        </div>
+
+        <div class="doc-quote-box">
+            "THE ARCHIVE IS NOT A REPOSITORY OF DEPARTED TIME, BUT THE LIVING RECORD OF CONSCIOUSNESS COLLAPSING ITS OWN
+            FRACTALS ACROSS THE TORUS."
+        </div>
+
+        <input type="text" id="archive-filter" class="filter-input" placeholder="filter by track or keyword">
+
+        <div id="no-docs-message" class="doc-body-text" style="color: #FF3333; margin-top: 20px;">
+            // ALL ARCHIVE SECTORS CURRENTLY LOCKED //<br><br>
+            NO HARMONIC NODES ARE SYNCHRONIZED. ENTER DECRYPTION HASHES IN THE TELEMETRY NETWORK TO PROGRESSIVELY REVEAL
+            ARCHIVE NODES.<br><br>
+            <a href="index.html">> ACCESS TELEMETRY NETWORK</a>
+        </div>
+
+        <div id="no-match-message" class="doc-body-text" style="display: none; color: #FFB000; margin-top: 20px;">
+            NO REVEALED CLASSIFIED DOCUMENTS MATCH YOUR FILTER QUERY.
+        </div>
+
+        <div class="archive-grid" id="archive-grid">
+
+            <div class="archive-card" data-track-index="0"
+                data-search="PRPH-01-WAVE FIGMENTS THE ONTOLOGY OF OBSERVED PROJECTIONS">
+                <div class="archive-card-header">
+                    <span>NODE 01 // TRACK 01</span>
+                    <span>PRPH-01-WAVE</span>
+                </div>
+                <h3 class="archive-card-title">FIGMENTS</h3>
+                <div class="archive-card-sub">The Ontology of Observed Projections</div>
+                <a href="prophecy-01.html" class="archive-card-meta">ACCESS FIELD NOTES [01] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="1"
+                data-search="PRPH-02-BLOCK DECEIT ENGINE THE ARCHITECTURE OF CONSENSUAL ILLUSION">
+                <div class="archive-card-header">
+                    <span>NODE 02 // TRACK 02</span>
+                    <span>PRPH-02-BLOCK</span>
+                </div>
+                <h3 class="archive-card-title">DECEIT ENGINE</h3>
+                <div class="archive-card-sub">The Architecture of Consensual Illusion</div>
+                <a href="prophecy-02.html" class="archive-card-meta">ACCESS FIELD NOTES [02] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="2"
+                data-search="PRPH-03-NULL FORWARD THE ASYMMETRY OF THE ARROW">
+                <div class="archive-card-header">
+                    <span>NODE 03 // TRACK 03</span>
+                    <span>PRPH-03-NULL</span>
+                </div>
+                <h3 class="archive-card-title">FORWARD</h3>
+                <div class="archive-card-sub">The Asymmetry of the Arrow</div>
+                <a href="prophecy-03.html" class="archive-card-meta">ACCESS FIELD NOTES [03] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="3"
+                data-search="PRPH-04-MASS GLASS WALLS THE TRANSPARENT PANOPTICON">
+                <div class="archive-card-header">
+                    <span>NODE 04 // TRACK 04</span>
+                    <span>PRPH-04-MASS</span>
+                </div>
+                <h3 class="archive-card-title">GLASS WALLS</h3>
+                <div class="archive-card-sub">The Transparent Panopticon</div>
+                <a href="prophecy-04.html" class="archive-card-meta">ACCESS FIELD NOTES [04] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="4"
+                data-search="PRPH-05-FREQ LITTLE EYES MICRO-TELEMETRY OF THE WITNESS">
+                <div class="archive-card-header">
+                    <span>NODE 05 // TRACK 05</span>
+                    <span>PRPH-05-FREQ</span>
+                </div>
+                <h3 class="archive-card-title">LITTLE EYES</h3>
+                <div class="archive-card-sub">Micro-Telemetry of the Witness</div>
+                <a href="prophecy-05.html" class="archive-card-meta">ACCESS FIELD NOTES [05] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="5" data-search="PRPH-06-PHAS MEANINGLESS THE RADIANT VOID">
+                <div class="archive-card-header">
+                    <span>NODE 06 // TRACK 06</span>
+                    <span>PRPH-06-PHAS</span>
+                </div>
+                <h3 class="archive-card-title">MEANINGLESS</h3>
+                <div class="archive-card-sub">The Radiant Void</div>
+                <a href="prophecy-06.html" class="archive-card-meta">ACCESS FIELD NOTES [06] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="6" data-search="PRPH-07-GRID BONE MARROW CELLULAR CARTOGRAPHY">
+                <div class="archive-card-header">
+                    <span>NODE 07 // TRACK 07</span>
+                    <span>PRPH-07-GRID</span>
+                </div>
+                <h3 class="archive-card-title">BONE MARROW</h3>
+                <div class="archive-card-sub">Cellular Cartography</div>
+                <a href="prophecy-07.html" class="archive-card-meta">ACCESS FIELD NOTES [07] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="7"
+                data-search="PRPH-08-VOID INC SONG THE HYMN OF THE CORPORATE IDOL">
+                <div class="archive-card-header">
+                    <span>NODE 08 // TRACK 08</span>
+                    <span>PRPH-08-VOID</span>
+                </div>
+                <h3 class="archive-card-title">INC SONG</h3>
+                <div class="archive-card-sub">The Hymn of the Corporate Idol</div>
+                <a href="prophecy-08.html" class="archive-card-meta">ACCESS FIELD NOTES [08] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="8"
+                data-search="PRPH-09-FLUX LUSTER THE TRANSIENCE OF CHROMATIC EMISSION">
+                <div class="archive-card-header">
+                    <span>NODE 09 // TRACK 09</span>
+                    <span>PRPH-09-FLUX</span>
+                </div>
+                <h3 class="archive-card-title">LUSTER</h3>
+                <div class="archive-card-sub">The Transience of Chromatic Emission</div>
+                <a href="prophecy-09.html" class="archive-card-meta">ACCESS FIELD NOTES [09] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="9" data-search="PRPH-10-CORE TRACK 10 THE CENTRAL SINGULARITY">
+                <div class="archive-card-header">
+                    <span>NODE 10 // TRACK 10</span>
+                    <span>PRPH-10-CORE</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 10</h3>
+                <div class="archive-card-sub">The Central Singularity</div>
+                <a href="prophecy-10.html" class="archive-card-meta">ACCESS FIELD NOTES [10] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="10"
+                data-search="PRPH-11-PULS TRACK 11 RHYTHMIC METABOLISM OF THE COSMOS">
+                <div class="archive-card-header">
+                    <span>NODE 11 // TRACK 11</span>
+                    <span>PRPH-11-PULS</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 11</h3>
+                <div class="archive-card-sub">Rhythmic Metabolism of the Cosmos</div>
+                <a href="prophecy-11.html" class="archive-card-meta">ACCESS FIELD NOTES [11] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="11"
+                data-search="PRPH-12-SHFT TRACK 12 THE KINEMATICS OF PARADIGM DRIFT">
+                <div class="archive-card-header">
+                    <span>NODE 12 // TRACK 12</span>
+                    <span>PRPH-12-SHFT</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 12</h3>
+                <div class="archive-card-sub">The Kinematics of Paradigm Drift</div>
+                <a href="prophecy-12.html" class="archive-card-meta">ACCESS FIELD NOTES [12] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="12"
+                data-search="PRPH-13-NODE TRACK 13 THE RELATIONAL INTERSECTION">
+                <div class="archive-card-header">
+                    <span>NODE 13 // TRACK 13</span>
+                    <span>PRPH-13-NODE</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 13</h3>
+                <div class="archive-card-sub">The Relational Intersection</div>
+                <a href="prophecy-13.html" class="archive-card-meta">ACCESS FIELD NOTES [13] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="13"
+                data-search="PRPH-14-SYNC TRACK 14 THE PHENOMENOLOGY OF COHERENCE">
+                <div class="archive-card-header">
+                    <span>NODE 14 // TRACK 14</span>
+                    <span>PRPH-14-SYNC</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 14</h3>
+                <div class="archive-card-sub">The Phenomenology of Coherence</div>
+                <a href="prophecy-14.html" class="archive-card-meta">ACCESS FIELD NOTES [14] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="14"
+                data-search="PRPH-15-ECHO TRACK 15 TEMPORAL REFLECTION & CAUSAL REVERB">
+                <div class="archive-card-header">
+                    <span>NODE 15 // TRACK 15</span>
+                    <span>PRPH-15-ECHO</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 15</h3>
+                <div class="archive-card-sub">Temporal Reflection & Causal Reverb</div>
+                <a href="prophecy-15.html" class="archive-card-meta">ACCESS FIELD NOTES [15] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="15" data-search="PRPH-16-PRZM TRACK 16 REFRACTIVE MULTIPLICITY">
+                <div class="archive-card-header">
+                    <span>NODE 16 // TRACK 16</span>
+                    <span>PRPH-16-PRZM</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 16</h3>
+                <div class="archive-card-sub">Refractive Multiplicity</div>
+                <a href="prophecy-16.html" class="archive-card-meta">ACCESS FIELD NOTES [16] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="16"
+                data-search="PRPH-17-SCAN TRACK 17 THE HERMENEUTICS OF SURVEILLANCE">
+                <div class="archive-card-header">
+                    <span>NODE 17 // TRACK 17</span>
+                    <span>PRPH-17-SCAN</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 17</h3>
+                <div class="archive-card-sub">The Hermeneutics of Surveillance</div>
+                <a href="prophecy-17.html" class="archive-card-meta">ACCESS FIELD NOTES [17] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="17" data-search="PRPH-18-ZERO TRACK 18 THE FERTILE VOID">
+                <div class="archive-card-header">
+                    <span>NODE 18 // TRACK 18</span>
+                    <span>PRPH-18-ZERO</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 18</h3>
+                <div class="archive-card-sub">The Fertile Void</div>
+                <a href="prophecy-18.html" class="archive-card-meta">ACCESS FIELD NOTES [18] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="18"
+                data-search="PRPH-19-BIND TRACK 19 COHESION AND THE BOND OF CARRIER WAVES">
+                <div class="archive-card-header">
+                    <span>NODE 19 // TRACK 19</span>
+                    <span>PRPH-19-BIND</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 19</h3>
+                <div class="archive-card-sub">Cohesion and the Bond of Carrier Waves</div>
+                <a href="prophecy-19.html" class="archive-card-meta">ACCESS FIELD NOTES [19] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="19" data-search="PRPH-20-LOOP TRACK 20 THE RECURSIVE SERPENT">
+                <div class="archive-card-header">
+                    <span>NODE 20 // TRACK 20</span>
+                    <span>PRPH-20-LOOP</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 20</h3>
+                <div class="archive-card-sub">The Recursive Serpent</div>
+                <a href="prophecy-20.html" class="archive-card-meta">ACCESS FIELD NOTES [20] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="20"
+                data-search="PRPH-21-TESS TRACK 21 GEOMETRIC EXHAUSTION OF SPACE">
+                <div class="archive-card-header">
+                    <span>NODE 21 // TRACK 21</span>
+                    <span>PRPH-21-TESS</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 21</h3>
+                <div class="archive-card-sub">Geometric Exhaustion of Space</div>
+                <a href="prophecy-21.html" class="archive-card-meta">ACCESS FIELD NOTES [21] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="21" data-search="PRPH-22-AXIS TRACK 22 THE IMMOVABLE FULCRUM">
+                <div class="archive-card-header">
+                    <span>NODE 22 // TRACK 22</span>
+                    <span>PRPH-22-AXIS</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 22</h3>
+                <div class="archive-card-sub">The Immovable Fulcrum</div>
+                <a href="prophecy-22.html" class="archive-card-meta">ACCESS FIELD NOTES [22] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="22" data-search="PRPH-23-VECT TRACK 23 DIRECTED INTENTIONALITY">
+                <div class="archive-card-header">
+                    <span>NODE 23 // TRACK 23</span>
+                    <span>PRPH-23-VECT</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 23</h3>
+                <div class="archive-card-sub">Directed Intentionality</div>
+                <a href="prophecy-23.html" class="archive-card-meta">ACCESS FIELD NOTES [23] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="23" data-search="PRPH-24-PRTL TRACK 24 THRESHOLD PHENOMENOLOGY">
+                <div class="archive-card-header">
+                    <span>NODE 24 // TRACK 24</span>
+                    <span>PRPH-24-PRTL</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 24</h3>
+                <div class="archive-card-sub">Threshold Phenomenology</div>
+                <a href="prophecy-24.html" class="archive-card-meta">ACCESS FIELD NOTES [24] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="24"
+                data-search="PRPH-25-NEXUS TRACK 25 THE CONFLUENCE OF PROBABILITY WEBS">
+                <div class="archive-card-header">
+                    <span>NODE 25 // TRACK 25</span>
+                    <span>PRPH-25-NEXUS</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 25</h3>
+                <div class="archive-card-sub">The Confluence of Probability Webs</div>
+                <a href="prophecy-25.html" class="archive-card-meta">ACCESS FIELD NOTES [25] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="25"
+                data-search="PRPH-26-PRIME TRACK 26 INDIVISIBLE ORIGIN MATRIX">
+                <div class="archive-card-header">
+                    <span>NODE 26 // TRACK 26</span>
+                    <span>PRPH-26-PRIME</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 26</h3>
+                <div class="archive-card-sub">Indivisible Origin Matrix</div>
+                <a href="prophecy-26.html" class="archive-card-meta">ACCESS FIELD NOTES [26] ></a>
+            </div>
+
+            <div class="archive-card" data-track-index="26"
+                data-search="PRPH-27-OMEGA TRACK 27 THE ESCHATON OF HARMONIC REUNIFICATION">
+                <div class="archive-card-header">
+                    <span>NODE 27 // TRACK 27</span>
+                    <span>PRPH-27-OMEGA</span>
+                </div>
+                <h3 class="archive-card-title">TRACK 27</h3>
+                <div class="archive-card-sub">The Eschaton of Harmonic Reunification</div>
+                <a href="prophecy-27.html" class="archive-card-meta">ACCESS FIELD NOTES [27] ></a>
+            </div>
+
+        </div>
+
+        <div class="doc-nav-bar">
+            <a href="index.html">> SYSTEM_ROOT</a>
+            <span style="color: var(--dim-green);">CLASSIFIED ARCHIVE // END OF TRANSMISSION</span>
+        </div>
+
     </div>
 
-    <div class="telemetry-meta-grid">
-        <div class="telemetry-item">
-            <span>TOTAL NODES:</span> 
-            <span id="unlocked-count-display">0 DECRYPTED</span>
-        </div>
-        <div class="telemetry-item">
-            <span>SYSTEM STATUS:</span> 
-            <span>SYNCHRONIZED (432Hz)</span>
-        </div>
-        <div class="telemetry-item">
-            <span>ENCRYPTION:</span> 
-            <span>QUANTUM HASH ENCODED</span>
-        </div>
-        <div class="telemetry-item">
-            <span>CARRIER PROTOCOL:</span> 
-            <span>HALLOWRITE-BROADCAST</span>
-        </div>
-    </div>
+    <script>
+        // TELEMETRY LOGIC OVERRIDE
+        function getUnlockedIndices() {
+            try {
+                const raw = localStorage.getItem('prophecies_unlocked_tracks') || localStorage.getItem('unlockedTracks');
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed)) {
+                        return parsed.map(Number);
+                    }
+                }
+            } catch (err) {
+                console.error('Error loading unlocked tracks:', err);
+            }
+            return [];
+        }
 
-    <div class="doc-quote-box">
-        "THE ARCHIVE IS NOT A REPOSITORY OF DEPARTED TIME, BUT THE LIVING RECORD OF CONSCIOUSNESS COLLAPSING ITS OWN FRACTALS ACROSS THE TORUS."
-    </div>
+        const filterInput = document.getElementById('archive-filter');
+        const cards = document.querySelectorAll('.archive-card');
+        const noDocsMsg = document.getElementById('no-docs-message');
+        const noMatchMsg = document.getElementById('no-match-message');
+        const unlockedCountEl = document.getElementById('unlocked-count-display');
 
-    <input type="text" id="archive-filter" class="filter-input" placeholder="filter by track or keyword">
+        function updateArchiveDisplay() {
+            const unlockedIndices = getUnlockedIndices();
+            const filterVal = filterInput ? filterInput.value.toUpperCase().trim() : '';
 
-    <div id="no-docs-message" class="doc-body-text" style="color: #FF3333; margin-top: 20px;">
-        // ALL ARCHIVE SECTORS CURRENTLY LOCKED //<br><br>
-        NO HARMONIC NODES ARE SYNCHRONIZED. ENTER DECRYPTION HASHES IN THE TELEMETRY NETWORK TO PROGRESSIVELY REVEAL ARCHIVE NODES.<br><br>
-        <a href="index.html">> ACCESS TELEMETRY NETWORK</a>
-    </div>
+            if (unlockedCountEl) {
+                unlockedCountEl.textContent = `${unlockedIndices.length} DECRYPTED`;
+            }
 
-    <div id="no-match-message" class="doc-body-text" style="display: none; color: #FFB000; margin-top: 20px;">
-        NO REVEALED CLASSIFIED DOCUMENTS MATCH YOUR FILTER QUERY.
-    </div>
+            if (unlockedIndices.length === 0) {
+                cards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                if (noDocsMsg) noDocsMsg.style.display = 'block';
+                if (noMatchMsg) noMatchMsg.style.display = 'none';
+                return;
+            }
 
-    <div class="archive-grid" id="archive-grid">
-        
-        <div class="archive-card" data-track-index="0" data-search="PRPH-01-WAVE FIGMENTS THE ONTOLOGY OF OBSERVED PROJECTIONS">
-            <div class="archive-card-header">
-                <span>NODE 01 // TRACK 01</span>
-                <span>PRPH-01-WAVE</span>
-            </div>
-            <h3 class="archive-card-title">FIGMENTS</h3>
-            <div class="archive-card-sub">The Ontology of Observed Projections</div>
-            <a href="prophecy-01.html" class="archive-card-meta">ACCESS FIELD NOTES [01] ></a>
-        </div>
-        
-        <div class="archive-card" data-track-index="1" data-search="PRPH-02-BLOCK DECEIT ENGINE THE ARCHITECTURE OF CONSENSUAL ILLUSION">
-            <div class="archive-card-header">
-                <span>NODE 02 // TRACK 02</span>
-                <span>PRPH-02-BLOCK</span>
-            </div>
-            <h3 class="archive-card-title">DECEIT ENGINE</h3>
-            <div class="archive-card-sub">The Architecture of Consensual Illusion</div>
-            <a href="prophecy-02.html" class="archive-card-meta">ACCESS FIELD NOTES [02] ></a>
-        </div>
+            if (noDocsMsg) noDocsMsg.style.display = 'none';
+            let visibleCount = 0;
 
-        <div class="archive-card" data-track-index="2" data-search="PRPH-03-NULL FORWARD THE ASYMMETRY OF THE ARROW">
-            <div class="archive-card-header">
-                <span>NODE 03 // TRACK 03</span>
-                <span>PRPH-03-NULL</span>
-            </div>
-            <h3 class="archive-card-title">FORWARD</h3>
-            <div class="archive-card-sub">The Asymmetry of the Arrow</div>
-            <a href="prophecy-03.html" class="archive-card-meta">ACCESS FIELD NOTES [03] ></a>
-        </div>
+            cards.forEach((card, idx) => {
+                const trackIdx = card.hasAttribute('data-track-index')
+                    ? parseInt(card.getAttribute('data-track-index'), 10)
+                    : idx;
 
-        <div class="archive-card" data-track-index="3" data-search="PRPH-04-MASS GLASS WALLS THE TRANSPARENT PANOPTICON">
-            <div class="archive-card-header">
-                <span>NODE 04 // TRACK 04</span>
-                <span>PRPH-04-MASS</span>
-            </div>
-            <h3 class="archive-card-title">GLASS WALLS</h3>
-            <div class="archive-card-sub">The Transparent Panopticon</div>
-            <a href="prophecy-04.html" class="archive-card-meta">ACCESS FIELD NOTES [04] ></a>
-        </div>
+                const isUnlocked = unlockedIndices.includes(trackIdx);
 
-        <div class="archive-card" data-track-index="4" data-search="PRPH-05-FREQ LITTLE EYES MICRO-TELEMETRY OF THE WITNESS">
-            <div class="archive-card-header">
-                <span>NODE 05 // TRACK 05</span>
-                <span>PRPH-05-FREQ</span>
-            </div>
-            <h3 class="archive-card-title">LITTLE EYES</h3>
-            <div class="archive-card-sub">Micro-Telemetry of the Witness</div>
-            <a href="prophecy-05.html" class="archive-card-meta">ACCESS FIELD NOTES [05] ></a>
-        </div>
+                if (!isUnlocked) {
+                    card.style.display = 'none';
+                    return;
+                }
 
-        <div class="archive-card" data-track-index="5" data-search="PRPH-06-PHAS MEANINGLESS THE RADIANT VOID">
-            <div class="archive-card-header">
-                <span>NODE 06 // TRACK 06</span>
-                <span>PRPH-06-PHAS</span>
-            </div>
-            <h3 class="archive-card-title">MEANINGLESS</h3>
-            <div class="archive-card-sub">The Radiant Void</div>
-            <a href="prophecy-06.html" class="archive-card-meta">ACCESS FIELD NOTES [06] ></a>
-        </div>
+                const text = card.getAttribute('data-search') || card.innerText.toUpperCase();
 
-        <div class="archive-card" data-track-index="6" data-search="PRPH-07-GRID BONE MARROW CELLULAR CARTOGRAPHY">
-            <div class="archive-card-header">
-                <span>NODE 07 // TRACK 07</span>
-                <span>PRPH-07-GRID</span>
-            </div>
-            <h3 class="archive-card-title">BONE MARROW</h3>
-            <div class="archive-card-sub">Cellular Cartography</div>
-            <a href="prophecy-07.html" class="archive-card-meta">ACCESS FIELD NOTES [07] ></a>
-        </div>
+                if (!filterVal || text.includes(filterVal)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
 
-        <div class="archive-card" data-track-index="7" data-search="PRPH-08-VOID INC SONG THE HYMN OF THE CORPORATE IDOL">
-            <div class="archive-card-header">
-                <span>NODE 08 // TRACK 08</span>
-                <span>PRPH-08-VOID</span>
-            </div>
-            <h3 class="archive-card-title">INC SONG</h3>
-            <div class="archive-card-sub">The Hymn of the Corporate Idol</div>
-            <a href="prophecy-08.html" class="archive-card-meta">ACCESS FIELD NOTES [08] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="8" data-search="PRPH-09-FLUX LUSTER THE TRANSIENCE OF CHROMATIC EMISSION">
-            <div class="archive-card-header">
-                <span>NODE 09 // TRACK 09</span>
-                <span>PRPH-09-FLUX</span>
-            </div>
-            <h3 class="archive-card-title">LUSTER</h3>
-            <div class="archive-card-sub">The Transience of Chromatic Emission</div>
-            <a href="prophecy-09.html" class="archive-card-meta">ACCESS FIELD NOTES [09] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="9" data-search="PRPH-10-CORE TRACK 10 THE CENTRAL SINGULARITY">
-            <div class="archive-card-header">
-                <span>NODE 10 // TRACK 10</span>
-                <span>PRPH-10-CORE</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 10</h3>
-            <div class="archive-card-sub">The Central Singularity</div>
-            <a href="prophecy-10.html" class="archive-card-meta">ACCESS FIELD NOTES [10] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="10" data-search="PRPH-11-PULS TRACK 11 RHYTHMIC METABOLISM OF THE COSMOS">
-            <div class="archive-card-header">
-                <span>NODE 11 // TRACK 11</span>
-                <span>PRPH-11-PULS</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 11</h3>
-            <div class="archive-card-sub">Rhythmic Metabolism of the Cosmos</div>
-            <a href="prophecy-11.html" class="archive-card-meta">ACCESS FIELD NOTES [11] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="11" data-search="PRPH-12-SHFT TRACK 12 THE KINEMATICS OF PARADIGM DRIFT">
-            <div class="archive-card-header">
-                <span>NODE 12 // TRACK 12</span>
-                <span>PRPH-12-SHFT</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 12</h3>
-            <div class="archive-card-sub">The Kinematics of Paradigm Drift</div>
-            <a href="prophecy-12.html" class="archive-card-meta">ACCESS FIELD NOTES [12] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="12" data-search="PRPH-13-NODE TRACK 13 THE RELATIONAL INTERSECTION">
-            <div class="archive-card-header">
-                <span>NODE 13 // TRACK 13</span>
-                <span>PRPH-13-NODE</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 13</h3>
-            <div class="archive-card-sub">The Relational Intersection</div>
-            <a href="prophecy-13.html" class="archive-card-meta">ACCESS FIELD NOTES [13] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="13" data-search="PRPH-14-SYNC TRACK 14 THE PHENOMENOLOGY OF COHERENCE">
-            <div class="archive-card-header">
-                <span>NODE 14 // TRACK 14</span>
-                <span>PRPH-14-SYNC</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 14</h3>
-            <div class="archive-card-sub">The Phenomenology of Coherence</div>
-            <a href="prophecy-14.html" class="archive-card-meta">ACCESS FIELD NOTES [14] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="14" data-search="PRPH-15-ECHO TRACK 15 TEMPORAL REFLECTION & CAUSAL REVERB">
-            <div class="archive-card-header">
-                <span>NODE 15 // TRACK 15</span>
-                <span>PRPH-15-ECHO</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 15</h3>
-            <div class="archive-card-sub">Temporal Reflection & Causal Reverb</div>
-            <a href="prophecy-15.html" class="archive-card-meta">ACCESS FIELD NOTES [15] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="15" data-search="PRPH-16-PRZM TRACK 16 REFRACTIVE MULTIPLICITY">
-            <div class="archive-card-header">
-                <span>NODE 16 // TRACK 16</span>
-                <span>PRPH-16-PRZM</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 16</h3>
-            <div class="archive-card-sub">Refractive Multiplicity</div>
-            <a href="prophecy-16.html" class="archive-card-meta">ACCESS FIELD NOTES [16] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="16" data-search="PRPH-17-SCAN TRACK 17 THE HERMENEUTICS OF SURVEILLANCE">
-            <div class="archive-card-header">
-                <span>NODE 17 // TRACK 17</span>
-                <span>PRPH-17-SCAN</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 17</h3>
-            <div class="archive-card-sub">The Hermeneutics of Surveillance</div>
-            <a href="prophecy-17.html" class="archive-card-meta">ACCESS FIELD NOTES [17] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="17" data-search="PRPH-18-ZERO TRACK 18 THE FERTILE VOID">
-            <div class="archive-card-header">
-                <span>NODE 18 // TRACK 18</span>
-                <span>PRPH-18-ZERO</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 18</h3>
-            <div class="archive-card-sub">The Fertile Void</div>
-            <a href="prophecy-18.html" class="archive-card-meta">ACCESS FIELD NOTES [18] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="18" data-search="PRPH-19-BIND TRACK 19 COHESION AND THE BOND OF CARRIER WAVES">
-            <div class="archive-card-header">
-                <span>NODE 19 // TRACK 19</span>
-                <span>PRPH-19-BIND</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 19</h3>
-            <div class="archive-card-sub">Cohesion and the Bond of Carrier Waves</div>
-            <a href="prophecy-19.html" class="archive-card-meta">ACCESS FIELD NOTES [19] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="19" data-search="PRPH-20-LOOP TRACK 20 THE RECURSIVE SERPENT">
-            <div class="archive-card-header">
-                <span>NODE 20 // TRACK 20</span>
-                <span>PRPH-20-LOOP</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 20</h3>
-            <div class="archive-card-sub">The Recursive Serpent</div>
-            <a href="prophecy-20.html" class="archive-card-meta">ACCESS FIELD NOTES [20] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="20" data-search="PRPH-21-TESS TRACK 21 GEOMETRIC EXHAUSTION OF SPACE">
-            <div class="archive-card-header">
-                <span>NODE 21 // TRACK 21</span>
-                <span>PRPH-21-TESS</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 21</h3>
-            <div class="archive-card-sub">Geometric Exhaustion of Space</div>
-            <a href="prophecy-21.html" class="archive-card-meta">ACCESS FIELD NOTES [21] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="21" data-search="PRPH-22-AXIS TRACK 22 THE IMMOVABLE FULCRUM">
-            <div class="archive-card-header">
-                <span>NODE 22 // TRACK 22</span>
-                <span>PRPH-22-AXIS</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 22</h3>
-            <div class="archive-card-sub">The Immovable Fulcrum</div>
-            <a href="prophecy-22.html" class="archive-card-meta">ACCESS FIELD NOTES [22] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="22" data-search="PRPH-23-VECT TRACK 23 DIRECTED INTENTIONALITY">
-            <div class="archive-card-header">
-                <span>NODE 23 // TRACK 23</span>
-                <span>PRPH-23-VECT</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 23</h3>
-            <div class="archive-card-sub">Directed Intentionality</div>
-            <a href="prophecy-23.html" class="archive-card-meta">ACCESS FIELD NOTES [23] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="23" data-search="PRPH-24-PRTL TRACK 24 THRESHOLD PHENOMENOLOGY">
-            <div class="archive-card-header">
-                <span>NODE 24 // TRACK 24</span>
-                <span>PRPH-24-PRTL</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 24</h3>
-            <div class="archive-card-sub">Threshold Phenomenology</div>
-            <a href="prophecy-24.html" class="archive-card-meta">ACCESS FIELD NOTES [24] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="24" data-search="PRPH-25-NEXUS TRACK 25 THE CONFLUENCE OF PROBABILITY WEBS">
-            <div class="archive-card-header">
-                <span>NODE 25 // TRACK 25</span>
-                <span>PRPH-25-NEXUS</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 25</h3>
-            <div class="archive-card-sub">The Confluence of Probability Webs</div>
-            <a href="prophecy-25.html" class="archive-card-meta">ACCESS FIELD NOTES [25] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="25" data-search="PRPH-26-PRIME TRACK 26 INDIVISIBLE ORIGIN MATRIX">
-            <div class="archive-card-header">
-                <span>NODE 26 // TRACK 26</span>
-                <span>PRPH-26-PRIME</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 26</h3>
-            <div class="archive-card-sub">Indivisible Origin Matrix</div>
-            <a href="prophecy-26.html" class="archive-card-meta">ACCESS FIELD NOTES [26] ></a>
-        </div>
-
-        <div class="archive-card" data-track-index="26" data-search="PRPH-27-OMEGA TRACK 27 THE ESCHATON OF HARMONIC REUNIFICATION">
-            <div class="archive-card-header">
-                <span>NODE 27 // TRACK 27</span>
-                <span>PRPH-27-OMEGA</span>
-            </div>
-            <h3 class="archive-card-title">TRACK 27</h3>
-            <div class="archive-card-sub">The Eschaton of Harmonic Reunification</div>
-            <a href="prophecy-27.html" class="archive-card-meta">ACCESS FIELD NOTES [27] ></a>
-        </div>
-
-    </div>
-
-    <div class="doc-nav-bar">
-        <a href="index.html">> SYSTEM_ROOT</a>
-        <span style="color: var(--dim-green);">CLASSIFIED ARCHIVE // END OF TRANSMISSION</span>
-    </div>
-
-</div>
-
-<script>
-// TELEMETRY LOGIC OVERRIDE
-function getUnlockedIndices() {
-    try {
-        const raw = localStorage.getItem('prophecies_unlocked_tracks') || localStorage.getItem('unlockedTracks');
-        if (raw) {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) {
-                return parsed.map(Number);
+            if (noMatchMsg) {
+                noMatchMsg.style.display = (visibleCount === 0 && filterVal.length > 0) ? 'block' : 'none';
             }
         }
-    } catch (err) {
-        console.error('Error loading unlocked tracks:', err);
-    }
-    return [];
-}
 
-const filterInput = document.getElementById('archive-filter');
-const cards = document.querySelectorAll('.archive-card');
-const noDocsMsg = document.getElementById('no-docs-message');
-const noMatchMsg = document.getElementById('no-match-message');
-const unlockedCountEl = document.getElementById('unlocked-count-display');
-
-function updateArchiveDisplay() {
-    const unlockedIndices = getUnlockedIndices();
-    const filterVal = filterInput ? filterInput.value.toUpperCase().trim() : '';
-
-    if (unlockedCountEl) {
-        unlockedCountEl.textContent = `${unlockedIndices.length} DECRYPTED`;
-    }
-
-    if (unlockedIndices.length === 0) {
-        cards.forEach(card => {
-            card.style.display = 'none';
-        });
-        if (noDocsMsg) noDocsMsg.style.display = 'block';
-        if (noMatchMsg) noMatchMsg.style.display = 'none';
-        return;
-    }
-
-    if (noDocsMsg) noDocsMsg.style.display = 'none';
-    let visibleCount = 0;
-
-    cards.forEach((card, idx) => {
-        const trackIdx = card.hasAttribute('data-track-index') 
-            ? parseInt(card.getAttribute('data-track-index'), 10) 
-            : idx;
-            
-        const isUnlocked = unlockedIndices.includes(trackIdx);
-        
-        if (!isUnlocked) {
-            card.style.display = 'none';
-            return;
+        if (filterInput) {
+            filterInput.addEventListener('input', updateArchiveDisplay);
         }
 
-        const text = card.getAttribute('data-search') || card.innerText.toUpperCase();
-        
-        if (!filterVal || text.includes(filterVal)) {
-            card.style.display = 'flex';
-            visibleCount++;
-        } else {
-            card.style.display = 'none';
-        }
-    });
-
-    if (noMatchMsg) {
-        noMatchMsg.style.display = (visibleCount === 0 && filterVal.length > 0) ? 'block' : 'none';
-    }
-}
-
-if (filterInput) {
-    filterInput.addEventListener('input', updateArchiveDisplay);
-}
-
-document.addEventListener('DOMContentLoaded', updateArchiveDisplay);
-updateArchiveDisplay();
-</script>
+        document.addEventListener('DOMContentLoaded', updateArchiveDisplay);
+        updateArchiveDisplay();
+    </script>
 
 </body>
+
 </html>

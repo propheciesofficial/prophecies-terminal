@@ -310,6 +310,7 @@
     }
 
     loadUnlockedTracks();
+    window.addEventListener('pageshow', loadUnlockedTracks);
 
     // Helper function to handle highlighting and conditional centering
     function centerOnNode(targetNode) {

@@ -67,6 +67,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', updateState);
+    window.addEventListener('pageshow', updateState);
+    window.addEventListener('focus', updateState);
     updateState();
   </script>
 </body>
