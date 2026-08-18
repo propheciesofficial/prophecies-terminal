@@ -102,7 +102,7 @@
     <div class="data-row"><span>NUMBER:</span> <span id="db-num"></span></div>
     <div class="data-row"><span>ALBUM:</span> <span id="db-album">HALLOWRITE</span></div>
     <div class="data-row"><span>SECTOR:</span> <span id="db-type"></span></div>
-    <div class="data-row"><span>DATA:</span> <span id="db-lore"></span></div>
+    <div class="data-row"><span id="db-data-label">DATA:</span> <span id="db-lore"></span></div>
     <a id="db-link" href="#" target="_blank" style="display: none;">ACCESS EXTRAPOLATED PROPHECY ></a>
   </div>
 
@@ -230,7 +230,7 @@
       const nodeTypes = ["LYRICS", "PHILOSOPHY", "PROPHECY"];
       const nodeLoreTexts = [
         `Lyrical transmission vector extracted from sector ${trackStringName}.`,
-        `Philosophical Treatise: ${philosophyTitles[i]}. Waveform resonance cataloged.`,
+        `Scientific Data: ${philosophyTitles[i]}. Waveform resonance cataloged.`,
         `Core scriptural prophecy document excerpt mapping local spatial anomalies for Track ${padNum}.`
       ];
 
@@ -351,6 +351,10 @@
       document.getElementById('db-num').innerText = targetNode.userData.trackData.trackNum;
       document.getElementById('db-album').innerText = "HALLOWRITE";
       document.getElementById('db-type').innerText = targetNode.userData.nodeType;
+      const dataLabel = document.getElementById('db-data-label');
+      if (dataLabel) {
+        dataLabel.innerText = (targetNode.userData.nodeType === 'PHILOSOPHY') ? 'ANOMALY:' : 'DATA:';
+      }
       document.getElementById('db-lore').innerText = targetNode.userData.lore;
       const dbLink = document.getElementById('db-link');
       if (targetNode.userData.nodeType === 'PROPHECY') {
