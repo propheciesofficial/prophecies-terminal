@@ -58,8 +58,10 @@
       "Mass-energy equivalence (E=mc2) and Quantum Field Theory reveal that solid "matter" is a perceptual illusion.
       “Matter" is nothing but deeply condensed energy. Atoms are non-physical and mostly empty space held together by
       unseen forces."
+    <div style="margin: 25px 0 20px 0;">
+      <p class="doc-body-text" id="decryption-status-line" style="margin-bottom: 6px;"><span class="amber-gold">>>>> DECRYPTING LOG<span id="decryption-dots">.</span></span></p>
+      <p class="doc-body-text" id="decryption-success-line" style="display: none; margin-bottom: 0;"><span class="neon-cyan">> LOG DECRYPTION SUCCESSFUL</span></p>
     </div>
-    <p class="doc-body-text"><span class="amber-gold">>> DECRYPTING LOG…</span></p>
     <div class="doc-section">
       <div class="section-tag">ENTRY 01</div>
       <p class="doc-body-text"><span class="alert-red">>> NEW COORDINATES SECURED: 1500 BCE (approx.), SARASVATI RIVER
@@ -347,9 +349,44 @@
         }
       }
 
+      let decryptionRunning = true;
+      const decryptDotsEl = document.getElementById('decryption-dots');
+      const decryptSuccessEl = document.getElementById('decryption-success-line');
+
+      let dotCount = 1;
+      const dotInterval = setInterval(() => {
+        if (!decryptionRunning) return;
+        dotCount = (dotCount % 4) + 1;
+        if (decryptDotsEl) {
+          decryptDotsEl.textContent = '.'.repeat(dotCount);
+        }
+      }, 350);
+
+      function finishDecryptionAndStart() {
+        if (!decryptionRunning) return;
+        decryptionRunning = false;
+        clearInterval(dotInterval);
+        if (decryptDotsEl) decryptDotsEl.textContent = '...';
+        if (decryptSuccessEl) decryptSuccessEl.style.display = 'block';
+
+        if (sectionData[0].paragraphs.length > 0) {
+          sectionData[0].paragraphs[0].element.prepend(cursor);
+        }
+        timer = setTimeout(typeNextChar, 300);
+      }
+
+      const decryptTimer = setTimeout(finishDecryptionAndStart, 3000);
+
       function skipCurrentSection(e) {
-        if (!isTyping) return;
         if (e && e.target && e.target.closest('a')) return;
+
+        if (decryptionRunning) {
+          clearTimeout(decryptTimer);
+          finishDecryptionAndStart();
+          return;
+        }
+
+        if (!isTyping) return;
 
         clearTimeout(timer);
 
@@ -379,12 +416,6 @@
       }
 
       document.addEventListener('click', skipCurrentSection);
-
-      if (sectionData[0].paragraphs.length > 0) {
-        sectionData[0].paragraphs[0].element.prepend(cursor);
-      }
-
-      typeNextChar();
     });
   </script>
 </body>
