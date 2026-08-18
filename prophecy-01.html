@@ -94,5 +94,81 @@
       </div>
     </div>
   </div>
+
+  <style>
+    .typewriter-cursor {
+      display: inline-block;
+      color: var(--neon-cyan, #00f3ff);
+      animation: blink-cursor 0.7s infinite;
+      margin-left: 2px;
+      font-weight: bold;
+    }
+    @keyframes blink-cursor {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paragraphs = Array.from(document.querySelectorAll('.doc-body-text'));
+      if (!paragraphs.length) return;
+
+      const entries = paragraphs.map(p => ({
+        element: p,
+        fullText: p.textContent.trim()
+      }));
+
+      entries.forEach(e => { e.element.textContent = ''; });
+
+      let pIndex = 0;
+      let charIndex = 0;
+      let isTyping = true;
+      let timer = null;
+      const typingSpeed = 25; // 25ms per character
+
+      const cursor = document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      cursor.textContent = '█';
+
+      function typeNextChar() {
+        if (pIndex >= entries.length) {
+          if (cursor.parentNode) cursor.remove();
+          isTyping = false;
+          return;
+        }
+
+        const current = entries[pIndex];
+
+        if (!current.element.contains(cursor)) {
+          current.element.appendChild(cursor);
+        }
+
+        if (charIndex < current.fullText.length) {
+          cursor.insertAdjacentText('beforebegin', current.fullText[charIndex]);
+          charIndex++;
+          timer = setTimeout(typeNextChar, typingSpeed);
+        } else {
+          charIndex = 0;
+          pIndex++;
+          timer = setTimeout(typeNextChar, 120);
+        }
+      }
+
+      function skipTyping(e) {
+        if (!isTyping) return;
+        if (e && e.target && e.target.closest('a')) return;
+        clearTimeout(timer);
+        isTyping = false;
+        if (cursor.parentNode) cursor.remove();
+        entries.forEach(item => {
+          item.element.textContent = item.fullText;
+        });
+      }
+
+      document.addEventListener('click', skipTyping);
+      typeNextChar();
+    });
+  </script>
 </body>
 </html>
