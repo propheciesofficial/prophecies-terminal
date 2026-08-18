@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PROPHECIES // TERMINAL</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="terminal-container">
     <div class="doc-header">
       <div class="doc-top-bar">
         <span>CORE // SYSTEM_ONLINE</span>
-        <span>FREQUENCY: 432 Hz HARMONIC</span>
+        <span>FREQUENCY: 432Hz HARMONIC</span>
         <span>STATUS: SECURE</span>
       </div>
       <h1 class="doc-title">PROPHECIES // SYSTEM_ONLINE</h1>
@@ -25,16 +27,17 @@
       </div>
       <div class="telemetry-item">
         <span>INTERFACE STATE:</span>
-        <span style="color: var(--crt-green);">AWAITING UPLINK</span>
+        <span style="color: var(--crt-green);">UPLINK SECURE</span>
       </div>
     </div>
 
-    <p>Frequencies established. No physical matter detected.</p>
+    <p>Frequency established. No physical matter detected.</p>
     <p>Initiate sequence.</p>
-    
+
     <nav style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
-      <a href="lore.html">> ACCESS_ENCRYPTED_TELEMETRY NETWORK</a>
-      <a href="documents.html" id="docs-archive-btn" class="btn-cyan" style="display: none;">> ACCESS_CLASSIFIED_DOCUMENTS_ARCHIVE</a>
+      <a href="lore.html">> ACCESS_ENCRYPTED_TELEMETRY_NETWORK</a>
+      <a href="documents.html" id="docs-archive-btn" class="btn-cyan" style="display: none;">>
+        ACCESS_CLASSIFIED_DOCUMENTS_ARCHIVE</a>
     </nav>
   </div>
 
@@ -55,8 +58,8 @@
         }
 
         const isDocsUnlocked = localStorage.getItem('documentsUnlocked') === 'true' ||
-                               localStorage.getItem('prophecies_documents_unlocked') === 'true' ||
-                               count > 0;
+          localStorage.getItem('prophecies_documents_unlocked') === 'true' ||
+          count > 0;
         const docsBtn = document.getElementById('docs-archive-btn');
         if (docsBtn) {
           docsBtn.style.display = isDocsUnlocked ? 'inline-block' : 'none';
@@ -72,4 +75,5 @@
     updateState();
   </script>
 </body>
+
 </html>
