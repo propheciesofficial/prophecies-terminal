@@ -639,21 +639,22 @@
         const targetTrackIndex = tracks.findIndex(t => t.data.hash === inputVal);
 
         if (targetTrackIndex !== -1) {
-          for (let i = 0; i <= targetTrackIndex; i++) {
-            tracks[i].data.unlocked = true;
-            tracks[i].line.visible = true;
-            tracks[i].nodes.forEach(node => {
-              node.visible = true;
-              if (!clickableNodes.includes(node)) clickableNodes.push(node);
-            });
-          }
+          const targetTrack = tracks[targetTrackIndex];
+          targetTrack.data.unlocked = true;
+          targetTrack.line.visible = true;
+          targetTrack.nodes.forEach(node => {
+            node.visible = true;
+            if (!clickableNodes.includes(node)) clickableNodes.push(node);
+          });
           saveUnlockedTracks();
           try {
             localStorage.setItem('documentsUnlocked', 'true');
             localStorage.setItem('prophecies_documents_unlocked', 'true');
           } catch (e) { }
-          outputLog.innerText = `DECRYPTION ACCEPTED: TRACKS 01 THROUGH ${targetTrackIndex + 1} SYNCHRONIZED.`;
+          const trackNum = String(targetTrackIndex + 1).padStart(2, '0');
+          outputLog.innerText = `DECRYPTION ACCEPTED: TRACK [${trackNum}] - ${targetTrack.data.name} SYNCHRONIZED.`;
           outputLog.style.color = "#FFB000";
+          centerOnNode(targetTrack.nodes[0]);
         } else {
           const searchTrack = tracks.find(t => t.data.name === inputVal);
 
