@@ -279,7 +279,7 @@
     // 2. TORUS DIMENSIONS
     const R = 4.5;
     const r = 4.45;
-    const totalTracks = 27;
+    const totalTracks = 3;
 
     function pseudoRandom(seed) {
       const x = Math.sin(seed * 12.9898) * 43758.5453;
@@ -293,20 +293,11 @@
     let activeTrackIndex = null;
 
     const trackNames = [
-      "FIGMENTS", "DECEIT ENGINE", "FORWARD", "GLASS WALLS", "LITTLE EYES",
-      "MEANINGLESS", "BONE MARROW", "INC SONG", "LUSTER",
-      "TRACK 10", "TRACK 11", "TRACK 12", "TRACK 13", "TRACK 14", "TRACK 15",
-      "TRACK 16", "TRACK 17", "TRACK 18", "TRACK 19", "TRACK 20", "TRACK 21",
-      "TRACK 22", "TRACK 23", "TRACK 24", "TRACK 25", "TRACK 26", "TRACK 27"
+      "FIGMENTS", "DECEIT ENGINE", "FORWARD"
     ];
 
     const hashes = [
-      "PRPH-01-WAVE", "PRPH-02-BLOCK", "PRPH-03-NULL", "PRPH-04-MASS", "PRPH-05-FREQ",
-      "PRPH-06-PHAS", "PRPH-07-GRID", "PRPH-08-VOID", "PRPH-09-FLUX", "PRPH-10-CORE",
-      "PRPH-11-PULS", "PRPH-12-SHFT", "PRPH-13-NODE", "PRPH-14-SYNC", "PRPH-15-ECHO",
-      "PRPH-16-PRZM", "PRPH-17-SCAN", "PRPH-18-ZERO", "PRPH-19-BIND", "PRPH-20-LOOP",
-      "PRPH-21-TESS", "PRPH-22-AXIS", "PRPH-23-VECT", "PRPH-24-PRTL", "PRPH-25-NEXUS",
-      "PRPH-26-PRIME", "PRPH-27-OMEGA"
+      "PRPH-01-WAVE", "PRPH-02-BLOCK", "PRPH-03-NULL"
     ];
 
     const lineMat = new THREE.LineBasicMaterial({ color: 0x4AF626, transparent: true, opacity: 0.35 });
@@ -314,31 +305,7 @@
     const scientificDataTitles = [
       "The Ontology of Observed Projections",
       "The Architecture of Consensual Illusion",
-      "The Asymmetry of the Arrow",
-      "The Transparent Panopticon",
-      "Micro-Telemetry of the Witness",
-      "The Radiant Void",
-      "Cellular Cartography",
-      "The Hymn of the Corporate Idol",
-      "The Transience of Chromatic Emission",
-      "The Central Singularity",
-      "Rhythmic Metabolism of the Cosmos",
-      "The Kinematics of Paradigm Drift",
-      "The Relational Intersection",
-      "The Phenomenology of Coherence",
-      "Temporal Reflection & Causal Reverb",
-      "Refractive Multiplicity",
-      "The Hermeneutics of Surveillance",
-      "The Fertile Void",
-      "Cohesion and the Bond of Carrier Waves",
-      "The Recursive Serpent",
-      "Geometric Exhaustion of Space",
-      "The Immovable Fulcrum",
-      "Directed Intentionality",
-      "Threshold Phenomenology",
-      "The Confluence of Probability Webs",
-      "Indivisible Origin Matrix",
-      "The Eschaton of Harmonic Reunification"
+      "The Asymmetry of the Arrow"
     ];
 
     for (let i = 0; i < totalTracks; i++) {

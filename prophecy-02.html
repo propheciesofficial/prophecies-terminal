@@ -11,7 +11,7 @@
     <div class="doc-header">
       <div class="doc-top-bar">
         <span>SECURITY LEVEL: CLASSIFIED // SECTOR 02</span>
-        <span>TELEMETRY: SCIENTIFIC DATA NODE [02/27]</span>
+        <span>TELEMETRY: SCIENTIFIC DATA NODE [02]</span>
         <span>
           RESONANCE: 434.12 Hz
           <div class="freq-visualizer">
@@ -76,15 +76,68 @@
 
     <div class="doc-nav-bar">
       <div class="doc-nav-group">
-        <a href="prophecy-01.html">< PREV NODE [01]</a>
-        <a href="prophecy-03.html">NEXT NODE [03] ></a>
+        <a id="nav-prev-node" href="#" style="display: none;">< PREV NODE</a>
+        <a id="nav-next-node" href="#" style="display: none;">NEXT NODE ></a>
       </div>
       <div class="doc-nav-group">
-        <a href="lore.html" class="btn-cyan">> TELEMETRY_TORUS</a>
+        <a href="lore.html" class="btn-cyan">> TELEMETRY_NETWORK_NAV</a>
         <a href="documents.html">> CLASSIFIED_ARCHIVE</a>
         <a href="index.html">> SYSTEM_ROOT</a>
       </div>
     </div>
   </div>
+
+  <script>
+    function updateDocNavigation(currentNodeNum) {
+      const currentIdx = currentNodeNum - 1;
+      let unlocked = [];
+      try {
+        const raw = localStorage.getItem('prophecies_unlocked_tracks') || localStorage.getItem('unlockedTracks');
+        if (raw) unlocked = JSON.parse(raw);
+        if (!Array.isArray(unlocked)) unlocked = [];
+      } catch (e) {
+        unlocked = [];
+      }
+
+      if (!unlocked.includes(currentIdx)) {
+        unlocked.push(currentIdx);
+        try {
+          localStorage.setItem('prophecies_unlocked_tracks', JSON.stringify(unlocked));
+          localStorage.setItem('unlockedTracks', JSON.stringify(unlocked));
+        } catch (e) { }
+      }
+
+      unlocked.sort((a, b) => a - b);
+
+      const prevBtn = document.getElementById('nav-prev-node');
+      const nextBtn = document.getElementById('nav-next-node');
+
+      const prevIndices = unlocked.filter(idx => idx < currentIdx);
+      if (prevIndices.length > 0 && prevBtn) {
+        const prevIdx = prevIndices[prevIndices.length - 1];
+        const prevNum = String(prevIdx + 1).padStart(2, '0');
+        prevBtn.href = `prophecy-${prevNum}.html`;
+        prevBtn.textContent = `< PREV NODE [${prevNum}]`;
+        prevBtn.style.display = 'inline-block';
+      } else if (prevBtn) {
+        prevBtn.style.display = 'none';
+      }
+
+      const nextIndices = unlocked.filter(idx => idx > currentIdx);
+      if (nextIndices.length > 0 && nextBtn) {
+        const nextIdx = nextIndices[0];
+        const nextNum = String(nextIdx + 1).padStart(2, '0');
+        nextBtn.href = `prophecy-${nextNum}.html`;
+        nextBtn.textContent = `NEXT NODE [${nextNum}] >`;
+        nextBtn.style.display = 'inline-block';
+      } else if (nextBtn) {
+        nextBtn.style.display = 'none';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateDocNavigation(2);
+    });
+  </script>
 </body>
 </html>
