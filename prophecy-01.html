@@ -119,7 +119,7 @@
 
     <div class="doc-section">
       <div class="section-tag">ENTRY 03</div>
-      <p class="doc-body-text">“Maya.”
+      <p class="doc-body-text">“Maya.”</p>
       <p class="doc-body-text">The Rishi unfolds it to me as it was set down long before either of us, and
         will be repeated long after both of us are gone. The earliest Vedic texts and the Upanishadic teachings tell of
         Maya representing the :cosmic illusion” of multiplicity.</p>
@@ -207,22 +207,45 @@
       const paragraphs = Array.from(document.querySelectorAll('.doc-body-text'));
       if (!paragraphs.length) return;
 
-      const entries = paragraphs.map(p => ({
-        element: p,
-        fullText: p.textContent.trim()
-      }));
+      const cursor = document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      cursor.textContent = '█';
 
-      entries.forEach(e => { e.element.textContent = ''; });
+      const entries = paragraphs.map(p => {
+        const origHTML = p.innerHTML;
+        const chars = [];
+
+        function processNode(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            const frag = document.createDocumentFragment();
+            for (let i = 0; i < text.length; i++) {
+              const span = document.createElement('span');
+              span.className = 'tw-char';
+              span.style.display = 'none';
+              span.textContent = text[i];
+              frag.appendChild(span);
+              chars.push(span);
+            }
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            Array.from(node.childNodes).forEach(processNode);
+          }
+        }
+
+        processNode(p);
+        return {
+          element: p,
+          chars: chars,
+          origHTML: origHTML
+        };
+      });
 
       let pIndex = 0;
       let charIndex = 0;
       let isTyping = true;
       let timer = null;
       const typingSpeed = 15; // 15ms per character
-
-      const cursor = document.createElement('span');
-      cursor.className = 'typewriter-cursor';
-      cursor.textContent = '█';
 
       function typeNextChar() {
         if (pIndex >= entries.length) {
@@ -233,12 +256,10 @@
 
         const current = entries[pIndex];
 
-        if (!current.element.contains(cursor)) {
-          current.element.appendChild(cursor);
-        }
-
-        if (charIndex < current.fullText.length) {
-          cursor.insertAdjacentText('beforebegin', current.fullText[charIndex]);
+        if (charIndex < current.chars.length) {
+          const charSpan = current.chars[charIndex];
+          charSpan.style.display = 'inline';
+          charSpan.after(cursor);
           charIndex++;
           timer = setTimeout(typeNextChar, typingSpeed);
         } else {
@@ -255,11 +276,16 @@
         isTyping = false;
         if (cursor.parentNode) cursor.remove();
         entries.forEach(item => {
-          item.element.textContent = item.fullText;
+          item.element.innerHTML = item.origHTML;
         });
       }
 
       document.addEventListener('click', skipTyping);
+
+      if (entries.length > 0 && entries[0].chars.length > 0) {
+        entries[0].element.prepend(cursor);
+      }
+
       typeNextChar();
     });
   </script>

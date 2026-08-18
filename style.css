@@ -10,6 +10,7 @@
   --border-green: rgba(74, 246, 38, 0.6);
   --border-amber: rgba(255, 176, 0, 0.6);
   --dark-panel: rgba(10, 20, 10, 0.85);
+  --neon-purple: #C77DFF;
   --alert-red: #FF3333;
 }
 
@@ -187,6 +188,13 @@ a:hover {
 .doc-body-text strong {
   color: var(--amber-gold);
 }
+
+/* Color Highlight Utility Classes */
+.text-purple, .purple { color: var(--neon-purple); }
+.text-cyan, .cyan { color: var(--neon-cyan); }
+.text-amber, .amber { color: var(--amber-gold); }
+.text-green, .green { color: var(--crt-green); }
+.text-red, .red { color: var(--alert-red); }
 
 .doc-quote-box {
   background: rgba(255, 176, 0, 0.05);
