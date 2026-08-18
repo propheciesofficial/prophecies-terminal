@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=Share+Tech+Mono&family=VT323&display=swap');
 
 :root {
   --bg-color: #060806;
@@ -162,7 +162,9 @@ a:hover {
 
 .section-tag {
   color: var(--amber-gold);
-  font-size: 22px;
+  font-size: 20px;
+  font-family: 'Oxanium', 'Share Tech Mono', sans-serif;
+  font-weight: 600;
   margin-bottom: 8px;
   letter-spacing: 1.5px;
   display: flex;
@@ -178,10 +180,11 @@ a:hover {
 
 .doc-body-text {
   color: #DCFFD6;
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: 19px;
+  line-height: 1.6;
   text-transform: none;
-  font-family: 'Share Tech Mono', 'VT323', monospace;
+  font-family: 'Oxanium', 'Share Tech Mono', sans-serif;
+  font-weight: 400;
   margin: 0 0 15px 0;
 }
 
