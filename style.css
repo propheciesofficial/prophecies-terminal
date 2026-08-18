@@ -191,7 +191,7 @@ a:hover {
 
 /* Color Highlight Utility Classes */
 .text-purple, .purple { color: var(--neon-purple); }
-.text-cyan, .cyan { color: var(--neon-cyan); }
+.text-cyan, .cyan, .neon-cyan { color: var(--neon-cyan); }
 .text-amber, .amber { color: var(--amber-gold); }
 .text-green, .green { color: var(--crt-green); }
 .text-red, .red { color: var(--alert-red); }
