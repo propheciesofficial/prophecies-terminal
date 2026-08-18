@@ -311,7 +311,7 @@
 
     const lineMat = new THREE.LineBasicMaterial({ color: 0x4AF626, transparent: true, opacity: 0.35 });
 
-    const philosophyTitles = [
+    const scientificDataTitles = [
       "The Ontology of Observed Projections",
       "The Architecture of Consensual Illusion",
       "The Asymmetry of the Arrow",
@@ -353,7 +353,7 @@
         hash: hashes[i],
         unlocked: isInitiallyUnlocked,
         trackNum: padNum,
-        link: `philosophy-${padNum}.html`
+        link: `prophecy-${padNum}.html`
       };
 
       const trackSeed = i + 1;
@@ -365,16 +365,16 @@
       trackLine.visible = isInitiallyUnlocked;
       innerGroup.add(trackLine);
 
-      const nodeTypes = ["LYRICS", "PHILOSOPHY", "PROPHECY"];
+      const nodeTypes = ["LYRICS", "SCIENTIFIC DATA", "PROPHECY"];
       const nodeLoreTexts = [
         `Lyrical transmission vector extracted from sector ${trackStringName}.`,
-        `${philosophyTitles[i]}`,
+        `${scientificDataTitles[i]}`,
         `Core scriptural prophecy document excerpt mapping local spatial anomalies for Track ${padNum}.`
       ];
 
       const nodeDocLinks = [
         `documents.html#lyrics-${padNum}`,
-        `philosophy-${padNum}.html`,
+        `prophecy-${padNum}.html`,
         `documents.html#prophecy-${padNum}`
       ];
 
@@ -491,7 +491,7 @@
       document.getElementById('db-type').innerText = targetNode.userData.nodeType;
       const dataLabel = document.getElementById('db-data-label');
       if (dataLabel) {
-        dataLabel.innerText = (targetNode.userData.nodeType === 'PHILOSOPHY') ? 'ANOMALY:' : 'DATA:';
+        dataLabel.innerText = (targetNode.userData.nodeType === 'SCIENTIFIC DATA') ? 'ANOMALY:' : 'DATA:';
       }
       document.getElementById('db-lore').innerText = targetNode.userData.lore;
       const dbLink = document.getElementById('db-link');
